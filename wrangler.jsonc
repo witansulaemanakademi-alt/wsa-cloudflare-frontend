@@ -1,6 +1,6 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "witan-sulaeman-akademi",
+  "name": "wsa-cloudflare-frontend",
   "main": "src/index.js",
   "compatibility_date": "2026-10-25",
   "assets": {
