@@ -17,6 +17,8 @@ const ALLOWED_METHODS = new Set([
   'finishPlayerEdit',
   'getAppStatus',
   'getPublicBootstrap',
+  'getHomePageImage',
+  'saveHomePageImage',
   'loadAdminData',
   'loadAdminDataForTab',
   'saveAgeCategories',
