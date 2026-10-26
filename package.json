@@ -1,8 +1,12 @@
 {
   "name": "wsa-cloudflare-frontend",
   "private": true,
-  "version": "1.4.3",
+  "version": "1.5.0",
+  "description": "Witan Sulaeman Akademi frontend and Worker API proxy",
   "scripts": {
-    "deploy": "npx wrangler deploy"
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.0.0"
   }
 }
