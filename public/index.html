@@ -513,7 +513,7 @@
                         </div>
                     </div>
                     <div class="w-48 h-48 md:w-64 md:h-64 rounded-full border-4 border-amber-400 overflow-hidden shadow-2xl flex-shrink-0 bg-maroon-900 flex items-center justify-center">
-                        <img src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&q=80&w=600" alt="Training" class="w-full h-full object-cover">
+                        <img id="home-hero-image" src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&q=80&w=600" alt="Training" class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>
@@ -634,11 +634,11 @@
 
                         <div class="grid sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">7. Sekolah Saat ini <span class="text-red-500">*</span></label>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">7. Asal Sekolah <span class="text-red-500">*</span></label>
                                 <input type="text" id="reg_asal_sekolah" required class="w-full rounded-lg border-slate-300 p-2.5 text-sm border focus:ring-2 focus:ring-maroon-700" placeholder="SD / SMP / SMA">
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">8. Nomor HP/WA Pemain (Nomor HP Orang Tua) <span class="text-red-500">*</span></label>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">8. Nomor HP/WA Pemain <span class="text-red-500">*</span></label>
                                 <input type="tel" id="reg_hp_pemain" required class="w-full rounded-lg border-slate-300 p-2.5 text-sm border focus:ring-2 focus:ring-maroon-700" placeholder="08xxxxxxxxxx">
                             </div>
                         </div>
@@ -675,8 +675,8 @@
                         </h3>
                         <div class="grid sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">11. Nama Orang Tua (Ibu) <span class="text-red-500">*</span></label>
-                                <input type="text" id="reg_orang_tua" required class="w-full rounded-lg border-slate-300 p-2.5 text-sm border focus:ring-2 focus:ring-maroon-700" placeholder="Contoh: Siti">
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">11. Nama Orang Tua (Bapak & Ibu) <span class="text-red-500">*</span></label>
+                                <input type="text" id="reg_orang_tua" required class="w-full rounded-lg border-slate-300 p-2.5 text-sm border focus:ring-2 focus:ring-maroon-700" placeholder="Contoh: Bpk. Budi & Ibu Siti">
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-700 mb-1">12. Nomor HP Orang Tua <span class="text-red-500">*</span></label>
@@ -1293,6 +1293,31 @@
                             </form>
                         </div>
                     </div>
+                    <!-- Pengaturan Foto Beranda: URL gambar disimpan di sheet Pengaturan. -->
+                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                        <div>
+                            <h3 class="font-bold text-slate-800 text-base"><i class="fa-solid fa-image text-maroon-700 mr-2"></i> Ganti Foto Beranda</h3>
+                            <p class="text-xs text-slate-500 mt-1">Tempel URL foto langsung atau tautan berbagi Google Drive. Perubahan berlaku untuk semua pengunjung setelah disimpan.</p>
+                        </div>
+                        <form id="homeImageForm" onsubmit="handleSaveHomePageImage(event)" class="grid md:grid-cols-[minmax(0,1fr)_240px] gap-4 items-start">
+                            <div class="space-y-3">
+                                <div>
+                                    <label for="set_home_image_url" class="block text-xs font-semibold text-slate-700 mb-1">URL Foto Beranda</label>
+                                    <input type="url" id="set_home_image_url" required maxlength="2000" oninput="previewHomePageImage()" class="w-full p-2.5 text-xs rounded-lg border border-slate-300" placeholder="https://drive.google.com/file/d/.../view">
+                                    <p class="text-[11px] text-slate-500 mt-1">Untuk Google Drive, pastikan file foto memiliki akses “Siapa saja yang memiliki link — Viewer”.</p>
+                                </div>
+                                <button type="submit" class="w-full py-2.5 bg-maroon-700 hover:bg-maroon-800 text-white text-xs font-bold rounded-lg transition"><i class="fa-solid fa-floppy-disk mr-1"></i> Simpan Foto Beranda</button>
+                            </div>
+                            <div class="space-y-2">
+                                <p class="text-xs font-semibold text-slate-700">Pratinjau foto</p>
+                                <div class="h-36 w-full overflow-hidden border border-slate-200 bg-slate-50 flex items-center justify-center">
+                                    <img id="set_home_image_preview" src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&q=80&w=600" alt="Pratinjau foto beranda" class="w-full h-full object-cover">
+                                </div>
+                                <p class="text-[10px] text-slate-500">Foto akan tampil di bagian kanan banner Beranda.</p>
+                            </div>
+                        </form>
+                    </div>
+
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
                         <div>
                             <h3 class="font-bold text-slate-800 text-base"><i class="fa-solid fa-layer-group text-maroon-700 mr-2"></i> Kelola Kategori Usia Pendaftar</h3>
@@ -1489,6 +1514,8 @@
         let html5QrCode = null;
         const WSA_LOGO_FILE_ID = '14ZkhPuBhpanMS-PsZU-HODB9FnquZ9vX';
         const WSA_LOGO_URL = 'https://drive.google.com/file/d/' + WSA_LOGO_FILE_ID + '/view?usp=sharing';
+        const DEFAULT_HOME_PAGE_IMAGE = 'https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&q=80&w=600';
+        let homePageImageUrl = DEFAULT_HOME_PAGE_IMAGE;
         const MAX_FILE_BYTES = 5 * 1024 * 1024;
 
         const API_METHODS = new Set([
@@ -1510,6 +1537,8 @@
             'finishPlayerEdit',
             'getAppStatus',
             'getPublicBootstrap',
+            'getHomePageImage',
+            'saveHomePageImage',
             'loadAdminData',
             'loadAdminDataForTab',
             'saveAgeCategories',
@@ -1911,9 +1940,63 @@
                 renderNarratives();
                 renderNews();
                 renderGallery();
+                try {
+                    await loadHomePageImage(false);
+                } catch (imageErr) {
+                    console.warn('Foto beranda memakai gambar default karena pengaturan belum berhasil dimuat:', imageErr);
+                    applyHomePageImage(DEFAULT_HOME_PAGE_IMAGE);
+                }
             } catch (err) {
                 console.error('Gagal memuat data publik:', err);
                 showBackendNotice('Data publik tidak berhasil dimuat. ' + String(err && err.message || err));
+            }
+        }
+
+        function applyHomePageImage(url) {
+            const value = String(url || DEFAULT_HOME_PAGE_IMAGE).trim() || DEFAULT_HOME_PAGE_IMAGE;
+            homePageImageUrl = value;
+            setImageWithFallback(
+                document.getElementById('home-hero-image'),
+                value,
+                'w1200',
+                DEFAULT_HOME_PAGE_IMAGE
+            );
+        }
+
+        async function loadHomePageImage(forSettings) {
+            const savedUrl = await apiCall('getHomePageImage');
+            const value = String(savedUrl || DEFAULT_HOME_PAGE_IMAGE).trim() || DEFAULT_HOME_PAGE_IMAGE;
+            applyHomePageImage(value);
+            const input = document.getElementById('set_home_image_url');
+            if (input && (forSettings || !input.value.trim())) input.value = value;
+            previewHomePageImage();
+            return value;
+        }
+
+        function previewHomePageImage() {
+            const input = document.getElementById('set_home_image_url');
+            const preview = document.getElementById('set_home_image_preview');
+            if (!preview) return;
+            const value = input && input.value.trim() ? input.value.trim() : DEFAULT_HOME_PAGE_IMAGE;
+            setImageWithFallback(preview, value, 'w800', DEFAULT_HOME_PAGE_IMAGE);
+        }
+
+        async function handleSaveHomePageImage(e) {
+            if (e && typeof e.preventDefault === 'function') e.preventDefault();
+            if (!adminToken) return notifyUser('Silakan login admin terlebih dahulu.', 'warning');
+            const input = document.getElementById('set_home_image_url');
+            const url = input ? input.value.trim() : '';
+            if (!/^https?:\/\//i.test(url)) {
+                return notifyUser('Masukkan URL foto yang diawali http:// atau https://.', 'warning');
+            }
+            try {
+                const savedUrl = await apiCall('saveHomePageImage', adminToken, url);
+                applyHomePageImage(savedUrl);
+                if (input) input.value = savedUrl;
+                previewHomePageImage();
+                notifyUser('Foto beranda berhasil diperbarui.', 'success');
+            } catch (err) {
+                showApiError(err);
             }
         }
 
@@ -1984,7 +2067,7 @@
                 else if (subTab === 'grading') populateVerifiedPlayersSelect();
                 else if (subTab === 'rekap-nilai') renderRekapNilaiTable();
                 else if (subTab === 'content') { renderNews(); renderGallery(); renderContentManagement(); }
-                else if (subTab === 'settings') { renderNarratives(); renderAgeCategoryManager(); }
+                else if (subTab === 'settings') { renderNarratives(); renderAgeCategoryManager(); await loadHomePageImage(true); }
             } catch (err) {
                 console.error('Tidak dapat menyegarkan data dashboard:', err);
                 showBackendNotice('Bagian dashboard gagal dimuat. ' + String(err && err.message || err));
@@ -3158,12 +3241,13 @@
             // Content/settings/edit forms all use their original form elements and handlers.
             document.querySelectorAll('form[onsubmit]').forEach(function (form) {
                 const expression = String(form.getAttribute('onsubmit') || '').trim();
-                const match = expression.match(/^(handleAddNews|handleAddGallery|handleSaveNarrative|handleChangePassword|handleSaveEditPlayer|handleAddAgeCategory)\(event\)$/);
+                const match = expression.match(/^(handleAddNews|handleAddGallery|handleSaveNarrative|handleSaveHomePageImage|handleChangePassword|handleSaveEditPlayer|handleAddAgeCategory)\(event\)$/);
                 if (!match) return;
                 const handlers = {
                     handleAddNews: handleAddNews,
                     handleAddGallery: handleAddGallery,
                     handleSaveNarrative: handleSaveNarrative,
+                    handleSaveHomePageImage: handleSaveHomePageImage,
                     handleChangePassword: handleChangePassword,
                     handleSaveEditPlayer: handleSaveEditPlayer,
                     handleAddAgeCategory: handleAddAgeCategory
@@ -3175,7 +3259,8 @@
                 const expression = String(el.getAttribute('oninput') || '').trim().replace(/;$/, '');
                 const map = {
                     'renderAdminPlayersTable()': renderAdminPlayersTable,
-                    'renderRekapNilaiTable()': renderRekapNilaiTable
+                    'renderRekapNilaiTable()': renderRekapNilaiTable,
+                    'previewHomePageImage()': previewHomePageImage
                 };
                 const handler = map[expression];
                 if (!handler) return;
@@ -3198,15 +3283,15 @@
             handleAdminLogin, handleAdminLogout, exportPlayersCSV,
             startQrScanner, stopQrScanner, exportAttendanceCSV, clearAttendanceLog,
             handleSaveEvaluation, exportRekapNilaiCSV, handleAddNews, handleAddGallery,
-            handleSaveNarrative, handleChangePassword, closeEditPlayerModal,
+            handleSaveNarrative, handleSaveHomePageImage, previewHomePageImage, handleChangePassword, closeEditPlayerModal,
             handleSaveEditPlayer, handleAddAgeCategory, removeAgeCategory, handleDriveImageError,
             deletePlayer, openPlayerCardModal, openEditPlayerModal,
             openRaporModal, closeRaporModal, printPlayerRapor, deleteEval, editEval, cancelEvaluationEdit,
             renderAdminPlayersTable, renderRekapNilaiTable, renderNews, renderGallery,
             populatePlayerEvalInfo, changePlayerStatus
         });
-        window.__WSA_BUILD = '1.3.10';
-        console.info('WSA frontend build 1.3.7 loaded.');
+        window.__WSA_BUILD = '1.4.3';
+        console.info('WSA Cloudflare frontend build 1.4.3 loaded.');
 
         // Initialize independently so a rendering error cannot silently prevent the backend check.
         window.addEventListener('DOMContentLoaded', async () => {
