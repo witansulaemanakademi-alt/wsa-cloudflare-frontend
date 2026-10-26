@@ -513,7 +513,7 @@
                         </div>
                     </div>
                     <div class="w-48 h-48 md:w-64 md:h-64 rounded-full border-4 border-amber-400 overflow-hidden shadow-2xl flex-shrink-0 bg-maroon-900 flex items-center justify-center">
-                        <img id="home-hero-image" src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&q=80&w=600" alt="Training" class="w-full h-full object-cover">
+                        <img id="home-hero-image" src="https://drive.google.com/thumbnail?id=1rVUMf5dnNQDgO1cR6sDdy6lCPBsJ09_4&amp;sz=w1200" alt="Training" class="w-full h-full object-cover">
                     </div>
                 </div>
             </div>
@@ -1261,11 +1261,11 @@
                         </div>
                         <div class="grid sm:grid-cols-2 gap-3">
                             <div>
-                                <label for="rapor_sign_coach" class="block text-xs font-semibold text-slate-700 mb-1">Nama Tim Kepelatihan / Head Coach</label>
+                                <label for="rapor_sign_coach" class="block text-xs font-semibold text-slate-700 mb-1">Nama Tim Pelatih</label>
                                 <input id="rapor_sign_coach" type="text" maxlength="160" required class="w-full p-2.5 text-xs rounded-lg border border-slate-300" placeholder="Tim Kepelatihan WSA">
                             </div>
                             <div>
-                                <label for="rapor_sign_director" class="block text-xs font-semibold text-slate-700 mb-1">Nama Direktur Teknik Akademi</label>
+                                <label for="rapor_sign_director" class="block text-xs font-semibold text-slate-700 mb-1">Nama Direktur Teknik Witan Sulaeman Akademi</label>
                                 <input id="rapor_sign_director" type="text" maxlength="160" required class="w-full p-2.5 text-xs rounded-lg border border-slate-300" placeholder="Witan Sulaeman">
                             </div>
                         </div>
@@ -1432,7 +1432,7 @@
                             <div class="space-y-2">
                                 <p class="text-xs font-semibold text-slate-700">Pratinjau foto</p>
                                 <div class="h-36 w-full overflow-hidden border border-slate-200 bg-slate-50 flex items-center justify-center">
-                                    <img id="set_home_image_preview" src="https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&q=80&w=600" alt="Pratinjau foto beranda" class="w-full h-full object-cover">
+                                    <img id="set_home_image_preview" src="https://drive.google.com/thumbnail?id=1rVUMf5dnNQDgO1cR6sDdy6lCPBsJ09_4&amp;sz=w800" alt="Pratinjau foto beranda" class="w-full h-full object-cover">
                                 </div>
                                 <p class="text-[10px] text-slate-500">Foto akan tampil di bagian kanan banner Beranda.</p>
                             </div>
@@ -1653,7 +1653,7 @@
         let html5QrCode = null;
         const WSA_LOGO_FILE_ID = '14ZkhPuBhpanMS-PsZU-HODB9FnquZ9vX';
         const WSA_LOGO_URL = 'https://drive.google.com/file/d/' + WSA_LOGO_FILE_ID + '/view?usp=sharing';
-        const DEFAULT_HOME_PAGE_IMAGE = 'https://drive.google.com/file/d/1rVUMf5dnNQDgO1cR6sDdy6lCPBsJ09_4/view?usp=drive_link';
+        const DEFAULT_HOME_PAGE_IMAGE = 'https://drive.google.com/thumbnail?id=1rVUMf5dnNQDgO1cR6sDdy6lCPBsJ09_4&sz=w1200';
         let homePageImageUrl = DEFAULT_HOME_PAGE_IMAGE;
         const MAX_FILE_BYTES = 5 * 1024 * 1024;
 
@@ -3506,13 +3506,21 @@
                     <p class="text-xs text-slate-700 leading-relaxed italic">"${escapeHtml(ev.catatan)}"</p>
                 </div>
 
-                <div class="grid grid-cols-2 text-center text-xs pt-4 border-t border-slate-200">
-                    <div>
-                        <p class="text-slate-500 mb-12">Nilai Raport diberikan Oleh Tim Pelatih</p>
+                <div class="grid grid-cols-2 gap-4 text-center text-xs pt-4 border-t border-slate-200">
+                    <div class="rapor-signature-block" style="break-inside:avoid;page-break-inside:avoid;">
+                        <p class="text-slate-600 font-bold mb-1">Nilai Raport diberikan Oleh Tim Pelatih</p>
+                        <div style="height:76px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:5px;">
+                            <span aria-hidden="true" style="display:block;width:150px;height:1px;"></span>
+                        </div>
                         <p class="font-extrabold text-slate-900 border-b border-slate-400 inline-block px-4 pb-1">${escapeHtml(raporSignatures.coach || 'Tim Kepelatihan WSA')}</p>
                     </div>
-                    <div>
-                        <p class="text-slate-500 mb-12">Direktur Witan Sulaeman Akademi</p>
+                    <div class="rapor-signature-block" style="break-inside:avoid;page-break-inside:avoid;">
+                        <p class="text-slate-600 font-bold">Direktur Teknik Witan Sulaeman Akademi</p>
+                        <p class="text-[9px] font-extrabold tracking-wider text-slate-500 mt-1">TANDA TANGAN DAN CAP</p>
+                        <div style="position:relative;width:190px;height:78px;margin:0 auto 2px;">
+                            <img data-report-director-ttd="1" src="https://drive.google.com/thumbnail?id=1_42awnLzDxb8uVfK2LdwavdrnypPY31o&amp;sz=w400" alt="Tanda tangan Direktur Teknik" style="position:absolute;left:8px;top:3px;width:135px;height:65px;object-fit:contain;">
+                            <img data-report-director-cap="1" src="https://drive.google.com/thumbnail?id=1x9kURfVX5YbFzuoZbH391ZZmHdte9RRX&amp;sz=w400" alt="Cap Witan Sulaeman Akademi" style="position:absolute;right:2px;bottom:0;width:66px;height:66px;object-fit:contain;">
+                        </div>
                         <p class="font-extrabold text-slate-900 border-b border-slate-400 inline-block px-4 pb-1">${escapeHtml(raporSignatures.director || 'Witan Sulaeman')}</p>
                     </div>
                 </div>
@@ -3520,6 +3528,9 @@
 
             setImageWithFallback(container.querySelector('[data-report-logo]'), WSA_LOGO_URL, 'w700', 'https://placehold.co/100x120/800000/ffffff?text=WSA');
             setImageWithFallback(container.querySelector('[data-report-player-photo]'), p.foto, 'w400', 'https://placehold.co/100x100/800000/ffffff?text=WSA');
+            var transparentPixel = 'data:image/gif;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=';
+            setImageWithFallback(container.querySelector('[data-report-director-ttd]'), 'https://drive.google.com/file/d/1_42awnLzDxb8uVfK2LdwavdrnypPY31o/view?usp=sharing', 'w400', transparentPixel);
+            setImageWithFallback(container.querySelector('[data-report-director-cap]'), 'https://drive.google.com/file/d/1x9kURfVX5YbFzuoZbH391ZZmHdte9RRX/view?usp=sharing', 'w400', transparentPixel);
             document.getElementById('raporModal').classList.remove('hidden');
         }
 
@@ -3850,8 +3861,8 @@
             renderAdminPlayersTable, renderRekapNilaiTable, renderNews, renderGallery,
             populatePlayerEvalInfo, changePlayerStatus
         });
-        window.__WSA_BUILD = '1.5.1';
-        console.info('WSA Cloudflare frontend build 1.5.1 loaded.');
+        window.__WSA_BUILD = '1.5.3';
+        console.info('WSA Cloudflare frontend build 1.5.3 loaded.');
 
         // Initialize independently so a rendering error cannot silently prevent the backend check.
         window.addEventListener('DOMContentLoaded', async () => {
