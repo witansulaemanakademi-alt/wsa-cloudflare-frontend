@@ -1,11 +1,8 @@
 {
-  "name": "witan-sulaeman-akademi-worker",
+  "name": "wsa-cloudflare-frontend",
   "private": true,
-  "type": "module",
+  "version": "1.4.3",
   "scripts": {
-    "deploy": "wrangler deploy"
-  },
-  "devDependencies": {
-    "wrangler": "^4.0.0"
+    "deploy": "npx wrangler deploy"
   }
 }
