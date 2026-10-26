@@ -25,6 +25,8 @@ const ALLOWED_METHODS = new Set([
   'getSppReport',
   'saveSppPayment',
   'saveAgeCategories',
+  'renameAgeCategory',
+  'saveRaporSignatures',
   'saveAttendance',
   'saveEvaluation',
   'saveNarrative',
