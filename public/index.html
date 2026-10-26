@@ -588,14 +588,14 @@
                     
                     <!-- Kategori Usia -->
                     <div class="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                        <label class="block text-sm font-bold text-maroon-800 mb-2"><i class="fa-solid fa-layer-group mr-1"></i> 1. Pilihan Kategori Usia <span class="text-red-500">*</span></label>
+                        <label class="block text-sm font-bold text-maroon-800 mb-2"><i class="fa-solid fa-layer-group mr-1"></i> 1. Pilihan Nama Tim <span class="text-red-500">*</span></label>
                         <select id="reg_kategori" required class="w-full rounded-lg border-slate-300 p-3 text-sm focus:ring-2 focus:ring-maroon-700 border">
-                            <option value="">-- Pilih Kategori Usia --</option>
-                            <option value="U-10 (Tahun Lahir 2016-2017)">U-10 (Tahun Lahir 2016-2017)</option>
-                            <option value="U-12 (Tahun Lahir 2014-2015)">U-12 (Tahun Lahir 2014-2015)</option>
-                            <option value="U-14 (Tahun Lahir 2012-2013)">U-14 (Tahun Lahir 2012-2013)</option>
-                            <option value="U-16 (Tahun Lahir 2010-2011)">U-16 (Tahun Lahir 2010-2011)</option>
-                            <option value="U-18 (Tahun Lahir 2008-2009)">U-18 (Tahun Lahir 2008-2009)</option>
+                            <option value="">-- Pilih Nama Tim berdasarkan Tahun Lahir --</option>
+                            <option value="TIM KANCIL (Pemain Kelahiran: 2022 / 2021 / 2020)">TIM KANCIL (Pemain Kelahiran: 2022 / 2021 / 2020)</option>
+                            <option value="TIM ANOA (Pemain Kelahiran: 2019 / 2018 / 2017)">TIM ANOA (Pemain Kelahiran: 2019 / 2018 / 2017)</option>
+                            <option value="TIM GARUDA (Pemain Kelahiran: 2016 / 2015)">TIM GARUDA (Pemain Kelahiran: 2016 / 2015)</option>
+                            <option value="TIM RAJAWALI (Pemain Kelahiran: 2014 / 2013)">TIM RAJAWALI (Pemain Kelahiran: 2014 / 2013)</option>
+                            <option value="TIM MALEO (Pemain Kelahiran: 2011 / 2012)">TIM MALEO (Pemain Kelahiran: 2011 / 2012)</option>
                         </select>
                     </div>
 
@@ -623,7 +623,7 @@
                             </div>
                             <div>
                                 <label class="block text-xs font-semibold text-slate-700 mb-1">4. Tanggal Lahir <span class="text-red-500">*</span></label>
-                                <input type="date" id="reg_tanggal_lahir" required class="w-full rounded-lg border-slate-300 p-2.5 text-sm border focus:ring-2 focus:ring-maroon-700">
+                                <input type="date" id="reg_tanggal_lahir" required onchange="autoSelectTeamFromBirthDate('reg_tanggal_lahir', 'reg_kategori')" class="w-full rounded-lg border-slate-300 p-2.5 text-sm border focus:ring-2 focus:ring-maroon-700">
                             </div>
                         </div>
 
@@ -634,18 +634,24 @@
 
                         <div class="grid sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">7. Asal Sekolah <span class="text-red-500">*</span></label>
-                                <input type="text" id="reg_asal_sekolah" required class="w-full rounded-lg border-slate-300 p-2.5 text-sm border focus:ring-2 focus:ring-maroon-700" placeholder="SD / SMP / SMA">
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">7. Sekolah saat ini <span class="text-red-500">*</span></label>
+                                <input type="text" id="reg_asal_sekolah" required class="w-full rounded-lg border-slate-300 p-2.5 text-sm border focus:ring-2 focus:ring-maroon-700" placeholder="Nama sekolah saat ini">
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">8. Nomor HP/WA Pemain <span class="text-red-500">*</span></label>
-                                <input type="tel" id="reg_hp_pemain" required class="w-full rounded-lg border-slate-300 p-2.5 text-sm border focus:ring-2 focus:ring-maroon-700" placeholder="08xxxxxxxxxx">
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">8. NPSN (Nomor Pokok Sekolah Nasional)</label>
+                                <input type="text" inputmode="numeric" maxlength="8" id="reg_npsn" class="w-full rounded-lg border-slate-300 p-2.5 text-sm border focus:ring-2 focus:ring-maroon-700" placeholder="8 digit NPSN (bila diketahui)">
+                                <p class="text-[10px] text-slate-500 mt-1">NPSN opsional, isi 8 digit jika tersedia.</p>
                             </div>
                         </div>
 
                         <div class="grid sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">9. Posisi Pemain <span class="text-red-500">*</span></label>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">9. Nomor HP/WA Pemain</label>
+                                <input type="tel" id="reg_hp_pemain" class="w-full rounded-lg border-slate-300 p-2.5 text-sm border focus:ring-2 focus:ring-maroon-700" placeholder="08xxxxxxxxxx">
+                                <p class="text-[10px] text-slate-500 mt-1">Jika pemain tidak memiliki nomor, kosongkan dan sistem menggunakan nomor HP orang tua.</p>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">10. Posisi Pemain <span class="text-red-500">*</span></label>
                                 <select id="reg_posisi" required class="w-full rounded-lg border-slate-300 p-2.5 text-sm border focus:ring-2 focus:ring-maroon-700">
                                     <option value="">-- Pilih Posisi --</option>
                                     <option value="Kiper (GK)">Kiper (GK)</option>
@@ -657,7 +663,7 @@
                                 </select>
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">10. Pilihan Kaki Dominan <span class="text-red-500">*</span></label>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">11. Pilihan Kaki Dominan <span class="text-red-500">*</span></label>
                                 <select id="reg_kaki" required class="w-full rounded-lg border-slate-300 p-2.5 text-sm border focus:ring-2 focus:ring-maroon-700">
                                     <option value="">-- Pilih Dominasi Kaki --</option>
                                     <option value="Kanan">Kanan</option>
@@ -675,11 +681,11 @@
                         </h3>
                         <div class="grid sm:grid-cols-2 gap-4">
                             <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">11. Nama Orang Tua (Bapak & Ibu) <span class="text-red-500">*</span></label>
-                                <input type="text" id="reg_orang_tua" required class="w-full rounded-lg border-slate-300 p-2.5 text-sm border focus:ring-2 focus:ring-maroon-700" placeholder="Contoh: Bpk. Budi & Ibu Siti">
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">12. Nama Orang Tua (Ibu) <span class="text-red-500">*</span></label>
+                                <input type="text" id="reg_orang_tua" required class="w-full rounded-lg border-slate-300 p-2.5 text-sm border focus:ring-2 focus:ring-maroon-700" placeholder="Contoh: Nama Lengkap Ibu">
                             </div>
                             <div>
-                                <label class="block text-xs font-semibold text-slate-700 mb-1">12. Nomor HP Orang Tua <span class="text-red-500">*</span></label>
+                                <label class="block text-xs font-semibold text-slate-700 mb-1">13. Nomor HP Orang Tua <span class="text-red-500">*</span></label>
                                 <input type="tel" id="reg_hp_ortu" required class="w-full rounded-lg border-slate-300 p-2.5 text-sm border focus:ring-2 focus:ring-maroon-700" placeholder="08xxxxxxxxxx">
                             </div>
                         </div>
@@ -690,24 +696,24 @@
                         <h3 class="font-bold text-slate-800 border-b pb-2 text-base text-maroon-700 flex items-center gap-2">
                             <i class="fa-solid fa-cloud-arrow-up"></i> Upload Berkas Pendaftaran
                         </h3>
-                        <p class="text-xs text-slate-500">Berkas akan tersimpan secara terstruktur di folder khusus pemain pada Google Drive Akademi. Maksimal 5 MB per berkas.</p>
+                        <p class="text-xs text-slate-500">Berkas PDF atau gambar (JPG/PNG/WEBP/GIF/HEIC) tersimpan pada folder Google Drive masing-masing pemain. Maksimal 5 MB per berkas.</p>
 
                         <div class="grid sm:grid-cols-2 gap-4">
                             <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                                <label class="block text-xs font-bold text-slate-700 mb-1">13. Photo Pemain (JPEG/PNG) <span class="text-red-500">*</span></label>
-                                <input type="file" id="file_foto" accept="image/jpeg,image/png" required class="text-xs w-full text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-maroon-700 file:text-white hover:file:bg-maroon-800">
+                                <label class="block text-xs font-bold text-slate-700 mb-1">14. Foto Pemain (JPEG/PNG/WEBP) <span class="text-red-500">*</span></label>
+                                <input type="file" id="file_foto" accept="image/jpeg,image/png,image/webp,image/gif,image/heic,image/heif" required class="text-xs w-full text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-maroon-700 file:text-white hover:file:bg-maroon-800">
                             </div>
                             <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                                <label class="block text-xs font-bold text-slate-700 mb-1">14. Akte Kelahiran (PDF) <span class="text-red-500">*</span></label>
-                                <input type="file" id="file_akte" accept="application/pdf" required class="text-xs w-full text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-maroon-700 file:text-white hover:file:bg-maroon-800">
+                                <label class="block text-xs font-bold text-slate-700 mb-1">15. Akte Kelahiran (PDF/Gambar) <span class="text-red-500">*</span></label>
+                                <input type="file" id="file_akte" accept="application/pdf,image/jpeg,image/png,image/webp,image/gif,image/heic,image/heif" required class="text-xs w-full text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-maroon-700 file:text-white hover:file:bg-maroon-800">
                             </div>
                             <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                                <label class="block text-xs font-bold text-slate-700 mb-1">15. Ijazah Terakhir (PDF) <span class="text-red-500">*</span></label>
-                                <input type="file" id="file_ijazah" accept="application/pdf" required class="text-xs w-full text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-maroon-700 file:text-white hover:file:bg-maroon-800">
+                                <label class="block text-xs font-bold text-slate-700 mb-1">16. Ijazah Terakhir (PDF/Gambar) <span class="text-red-500">*</span></label>
+                                <input type="file" id="file_ijazah" accept="application/pdf,image/jpeg,image/png,image/webp,image/gif,image/heic,image/heif" required class="text-xs w-full text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-maroon-700 file:text-white hover:file:bg-maroon-800">
                             </div>
                             <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
-                                <label class="block text-xs font-bold text-slate-700 mb-1">16. Rapor / NISN (PDF) <span class="text-red-500">*</span></label>
-                                <input type="file" id="file_rapor" accept="application/pdf" required class="text-xs w-full text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-maroon-700 file:text-white hover:file:bg-maroon-800">
+                                <label class="block text-xs font-bold text-slate-700 mb-1">17. Rapor / NISN (PDF/Gambar) <span class="text-red-500">*</span></label>
+                                <input type="file" id="file_rapor" accept="application/pdf,image/jpeg,image/png,image/webp,image/gif,image/heic,image/heif" required class="text-xs w-full text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-maroon-700 file:text-white hover:file:bg-maroon-800">
                             </div>
                         </div>
                     </div>
@@ -794,8 +800,8 @@
                 <!-- Kategori usia ditempatkan di atas QR; petunjuk dan ID rata tengah di bawah QR. -->
                 <div id="card_qr_footer" class="mt-auto pt-4 border-t border-amber-400/30 flex flex-col items-center justify-end text-center gap-2">
                     <div id="card_category_block" class="mb-1">
-                        <span class="block text-xs sm:text-sm text-amber-200/90 uppercase font-bold tracking-wider">Kategori Usia</span>
-                        <p id="card_kategori" class="font-black text-2xl sm:text-3xl text-amber-300 leading-tight">U-12</p>
+                        <span class="block text-xs sm:text-sm text-amber-200/90 uppercase font-bold tracking-wider">Nama Tim</span>
+                        <p id="card_kategori" class="font-black text-2xl sm:text-3xl text-amber-300 leading-tight">TIM KANCIL</p>
                     </div>
                     <!-- QR Code Element Container -->
                     <div id="qrcode" class="bg-white p-2 rounded-lg border border-amber-300 shrink-0"></div>
@@ -866,6 +872,7 @@
                 <div class="flex flex-wrap gap-2 border-b pb-3 border-slate-200">
                     <button onclick="switchAdminSubTab('players')" id="admin-subtab-players-btn" class="px-4 py-2 bg-maroon-700 text-white text-xs font-bold rounded-lg transition">Manajemen Pemain</button>
                     <button onclick="switchAdminSubTab('attendance')" id="admin-subtab-attendance-btn" class="px-4 py-2 bg-white text-slate-700 hover:bg-slate-100 text-xs font-bold rounded-lg border border-slate-200 transition"><i class="fa-solid fa-qrcode mr-1"></i> Scan Absensi QR</button>
+                    <button onclick="switchAdminSubTab('spp')" id="admin-subtab-spp-btn" class="px-4 py-2 bg-white text-slate-700 hover:bg-slate-100 text-xs font-bold rounded-lg border border-slate-200 transition"><i class="fa-solid fa-money-bill-wave mr-1"></i> Pembayaran SPP</button>
                     <button onclick="switchAdminSubTab('grading')" id="admin-subtab-grading-btn" class="px-4 py-2 bg-white text-slate-700 hover:bg-slate-100 text-xs font-bold rounded-lg border border-slate-200 transition"><i class="fa-solid fa-pen-nib mr-1"></i> Penilaian Pemain</button>
                     <button onclick="switchAdminSubTab('rekap-nilai')" id="admin-subtab-rekap-nilai-btn" class="px-4 py-2 bg-white text-slate-700 hover:bg-slate-100 text-xs font-bold rounded-lg border border-slate-200 transition"><i class="fa-solid fa-chart-line mr-1"></i> Rekapan & Rapor</button>
                     <button onclick="switchAdminSubTab('content')" id="admin-subtab-content-btn" class="px-4 py-2 bg-white text-slate-700 hover:bg-slate-100 text-xs font-bold rounded-lg border border-slate-200 transition">Kelola Berita & Galeri</button>
@@ -891,7 +898,7 @@
                                     <tr>
                                         <th class="p-3">ID / Nama</th>
                                         <th class="p-3">NISN</th>
-                                        <th class="p-3">Kategori</th>
+                                        <th class="p-3">Nama Tim</th>
                                         <th class="p-3">Posisi</th>
                                         <th class="p-3">Berkas Dokumen</th>
                                         <th class="p-3">Status</th>
@@ -923,7 +930,7 @@
 
                         <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
                             <div class="flex justify-between items-center border-b pb-2">
-                                <h3 class="font-bold text-slate-800 text-base"><i class="fa-solid fa-clipboard-user text-maroon-700 mr-2"></i> Rekap Absensi Hari Ini</h3>
+                                <h3 class="font-bold text-slate-800 text-base"><i class="fa-solid fa-clipboard-user text-maroon-700 mr-2"></i> Laporan Absensi Bulanan</h3>
                                 <div class="flex gap-2">
                                     <button onclick="exportAttendanceCSV()" class="px-3 py-1 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded transition">
                                         <i class="fa-solid fa-file-csv mr-1"></i> Export Rekap
@@ -931,9 +938,100 @@
                                     <button onclick="clearAttendanceLog()" class="text-rose-600 hover:underline text-xs font-semibold">Reset Log</button>
                                 </div>
                             </div>
+                            <div class="grid sm:grid-cols-[minmax(0,1fr)_auto] gap-2 items-end">
+                                <div>
+                                    <label for="attendance_month" class="block text-xs font-semibold text-slate-700 mb-1">Pilih Bulan Laporan</label>
+                                    <input type="month" id="attendance_month" class="w-full p-2 rounded-lg border border-slate-300 text-xs" onchange="loadAttendanceMonthReport()">
+                                </div>
+                                <button type="button" onclick="loadAttendanceMonthReport()" class="px-4 py-2 bg-maroon-700 hover:bg-maroon-800 text-white text-xs font-bold rounded-lg"><i class="fa-solid fa-filter mr-1"></i> Tampilkan</button>
+                            </div>
+                            <p id="attendance_month_summary" class="text-[11px] text-slate-500">Memuat laporan absensi...</p>
                             <div id="attendance_log_container" class="space-y-2 max-h-[320px] overflow-y-auto">
                                 <!-- Log items -->
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subtab SPP: Pembayaran & Laporan Bulanan -->
+                <div id="admin-subtab-spp" class="hidden space-y-6">
+                    <div class="grid lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)] gap-6">
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                            <div>
+                                <h3 class="font-bold text-slate-800 text-base"><i class="fa-solid fa-money-bill-wave text-maroon-700 mr-2"></i> Form Pembayaran SPP</h3>
+                                <p class="text-xs text-slate-500 mt-1">Catat pembayaran SPP untuk satu pemain per bulan. Data tersimpan pada tab SPP di Google Sheets.</p>
+                            </div>
+                            <form id="sppPaymentForm" onsubmit="handleSaveSppPayment(event)" class="space-y-3">
+                                <input type="hidden" id="spp_payment_id" value="">
+                                <div>
+                                    <label for="spp_player_id" class="block text-xs font-semibold text-slate-700 mb-1">Nama Pemain <span class="text-red-500">*</span></label>
+                                    <select id="spp_player_id" required class="w-full p-2.5 rounded-lg border border-slate-300 text-xs">
+                                        <option value="">-- Pilih Pemain --</option>
+                                    </select>
+                                </div>
+                                <div class="grid sm:grid-cols-2 gap-3">
+                                    <div>
+                                        <label for="spp_month" class="block text-xs font-semibold text-slate-700 mb-1">Bulan SPP <span class="text-red-500">*</span></label>
+                                        <input type="month" id="spp_month" required class="w-full p-2.5 rounded-lg border border-slate-300 text-xs" onchange="loadSppReport()">
+                                    </div>
+                                    <div>
+                                        <label for="spp_amount" class="block text-xs font-semibold text-slate-700 mb-1">Nominal SPP (Rp) <span class="text-red-500">*</span></label>
+                                        <input type="number" id="spp_amount" required min="1" max="1000000000" step="1000" class="w-full p-2.5 rounded-lg border border-slate-300 text-xs" placeholder="Contoh: 150000">
+                                    </div>
+                                </div>
+                                <div class="grid sm:grid-cols-2 gap-3">
+                                    <div>
+                                        <label for="spp_status" class="block text-xs font-semibold text-slate-700 mb-1">Status Pembayaran</label>
+                                        <select id="spp_status" required class="w-full p-2.5 rounded-lg border border-slate-300 text-xs">
+                                            <option value="Belum Lunas">Belum Lunas</option>
+                                            <option value="Lunas">Lunas</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label for="spp_paid_date" class="block text-xs font-semibold text-slate-700 mb-1">Tanggal Bayar</label>
+                                        <input type="date" id="spp_paid_date" class="w-full p-2.5 rounded-lg border border-slate-300 text-xs">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="spp_note" class="block text-xs font-semibold text-slate-700 mb-1">Catatan</label>
+                                    <textarea id="spp_note" rows="2" class="w-full p-2.5 rounded-lg border border-slate-300 text-xs" placeholder="Catatan tambahan (opsional)"></textarea>
+                                </div>
+                                <div class="flex flex-wrap gap-2">
+                                    <button type="submit" id="spp_save_button" class="flex-1 py-2.5 bg-maroon-700 hover:bg-maroon-800 text-white text-xs font-bold rounded-lg"><i class="fa-solid fa-floppy-disk mr-1"></i> Simpan Pembayaran</button>
+                                    <button type="button" onclick="resetSppForm()" class="px-4 py-2.5 bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-bold rounded-lg">Batal / Kosongkan</button>
+                                </div>
+                                <p id="spp_form_notice" class="text-[11px] text-slate-500">Satu catatan pembayaran aktif untuk setiap pemain per bulan. Menyimpan lagi akan memperbarui catatan tersebut.</p>
+                            </form>
+                        </div>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
+                            <div class="flex flex-wrap items-center justify-between gap-3">
+                                <div>
+                                    <h3 class="font-bold text-slate-800 text-base"><i class="fa-solid fa-chart-column text-maroon-700 mr-2"></i> Laporan SPP Bulanan</h3>
+                                    <p id="spp_report_month_title" class="text-xs text-slate-500 mt-1">Pilih bulan untuk melihat laporan.</p>
+                                </div>
+                                <button type="button" onclick="exportSppCSV()" class="px-3 py-2 bg-emerald-600 hover:bg-emerald-700 text-white text-xs font-bold rounded-lg"><i class="fa-solid fa-file-csv mr-1"></i> Export CSV</button>
+                            </div>
+                            <div class="grid sm:grid-cols-2 gap-3">
+                                <div class="p-3 rounded-xl bg-emerald-50 border border-emerald-100">
+                                    <p class="text-[11px] font-semibold text-emerald-800">Total SPP Lunas</p>
+                                    <p id="spp_total_paid" class="text-xl font-black text-emerald-900">Rp0</p>
+                                    <p id="spp_paid_count" class="text-[10px] text-emerald-700">0 pembayaran</p>
+                                </div>
+                                <div class="p-3 rounded-xl bg-amber-50 border border-amber-100">
+                                    <p class="text-[11px] font-semibold text-amber-800">Tunggakan SPP</p>
+                                    <p id="spp_total_outstanding" class="text-xl font-black text-amber-900">Rp0</p>
+                                    <p id="spp_unpaid_count" class="text-[10px] text-amber-700">0 pembayaran</p>
+                                </div>
+                            </div>
+                            <div class="overflow-x-auto border border-slate-200 rounded-lg">
+                                <table class="w-full text-left text-xs min-w-[620px]">
+                                    <thead class="bg-slate-100 text-slate-700 uppercase font-bold border-b border-slate-200">
+                                        <tr><th class="p-3">Pemain / Tim</th><th class="p-3">Nominal</th><th class="p-3">Status</th><th class="p-3">Tanggal Bayar</th><th class="p-3">Aksi</th></tr>
+                                    </thead>
+                                    <tbody id="spp_table_body" class="divide-y divide-slate-200"><tr><td colspan="5" class="p-4 text-center text-slate-400">Memuat laporan SPP...</td></tr></tbody>
+                                </table>
+                            </div>
+                            <p id="spp_report_count" class="text-[11px] text-slate-500">0 catatan untuk bulan ini.</p>
                         </div>
                     </div>
                 </div>
@@ -950,7 +1048,7 @@
                             <div id="evaluation-edit-notice" class="hidden p-3 rounded-xl border border-blue-200 bg-blue-50 text-blue-900 text-xs" role="status">
                                 <p class="font-extrabold">Mode Edit Rapor</p>
                                 <p id="evaluation-edit-notice-text" class="mt-1"></p>
-                                <p class="mt-1 text-[11px]">Catatan: database lama menyimpan nilai rata-rata per kategori. Saat edit rapor lama, nilai rata-rata tersebut akan mengisi komponen pada kategori terkait.</p>
+                                <p class="mt-1 text-[11px]">Catatan: rapor yang dibuat sebelum versi 1.5.0 hanya menyimpan rata-rata kategori, sehingga nilai komponen lama tidak bisa dipulihkan. Penilaian baru menyimpan tiap komponen secara terpisah.</p>
                             </div>
                             <!-- Input Metadata Evaluasi -->
                             <div class="grid sm:grid-cols-3 gap-4 bg-slate-50 p-4 rounded-xl border border-slate-200">
@@ -1320,8 +1418,8 @@
 
                     <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-200 space-y-4">
                         <div>
-                            <h3 class="font-bold text-slate-800 text-base"><i class="fa-solid fa-layer-group text-maroon-700 mr-2"></i> Kelola Kategori Usia Pendaftar</h3>
-                            <p class="text-xs text-slate-500 mt-1">Kategori yang disimpan akan langsung menjadi pilihan pada formulir pendaftaran publik. Data pemain lama tidak dihapus ketika kategori dihapus dari pilihan.</p>
+                            <h3 class="font-bold text-slate-800 text-base"><i class="fa-solid fa-layer-group text-maroon-700 mr-2"></i> Kelola Kategori Tim Pendaftar</h3>
+                            <p class="text-xs text-slate-500 mt-1">Pilihan tim mengikuti kelompok tahun kelahiran dan langsung digunakan pada formulir pendaftaran. Data pemain lama tidak dihapus ketika kategori dihapus dari pilihan.</p>
                         </div>
                         <form id="ageCategoryForm" onsubmit="handleAddAgeCategory(event)" class="flex flex-col sm:flex-row gap-2">
                             <input id="age_category_new" type="text" required maxlength="120" class="flex-1 p-2.5 text-sm rounded-lg border border-slate-300" placeholder="Contoh: U-20 (Tahun Lahir 2006-2007)">
@@ -1356,9 +1454,9 @@
                             </div>
                         </div>
                         <div class="text-right text-[10px] text-slate-600 space-y-0.5">
-                            <p id="edit_preview_akte"><i class="fa-solid fa-file-pdf text-rose-600 mr-1"></i> Akte: <span class="font-semibold text-emerald-700">Tersedia</span></p>
-                            <p id="edit_preview_ijazah"><i class="fa-solid fa-file-pdf text-rose-600 mr-1"></i> Ijazah: <span class="font-semibold text-emerald-700">Tersedia</span></p>
-                            <p id="edit_preview_rapor"><i class="fa-solid fa-file-pdf text-rose-600 mr-1"></i> Rapor: <span class="font-semibold text-emerald-700">Tersedia</span></p>
+                            <p id="edit_preview_akte"><i class="fa-solid fa-file-lines text-rose-600 mr-1"></i> Akte: <span class="font-semibold text-emerald-700">Tersedia</span></p>
+                            <p id="edit_preview_ijazah"><i class="fa-solid fa-file-lines text-rose-600 mr-1"></i> Ijazah: <span class="font-semibold text-emerald-700">Tersedia</span></p>
+                            <p id="edit_preview_rapor"><i class="fa-solid fa-file-lines text-rose-600 mr-1"></i> Rapor: <span class="font-semibold text-emerald-700">Tersedia</span></p>
                         </div>
                     </div>
 
@@ -1374,13 +1472,13 @@
                     </div>
                     <div class="grid sm:grid-cols-2 gap-3">
                         <div>
-                            <label class="block font-semibold text-slate-700 mb-1">Kategori Usia</label>
+                            <label class="block font-semibold text-slate-700 mb-1">Nama Tim</label>
                             <select id="edit_kategori" required class="w-full p-2 rounded border border-slate-300">
-                                <option value="U-10 (Tahun Lahir 2016-2017)">U-10 (Tahun Lahir 2016-2017)</option>
-                                <option value="U-12 (Tahun Lahir 2014-2015)">U-12 (Tahun Lahir 2014-2015)</option>
-                                <option value="U-14 (Tahun Lahir 2012-2013)">U-14 (Tahun Lahir 2012-2013)</option>
-                                <option value="U-16 (Tahun Lahir 2010-2011)">U-16 (Tahun Lahir 2010-2011)</option>
-                                <option value="U-18 (Tahun Lahir 2008-2009)">U-18 (Tahun Lahir 2008-2009)</option>
+                                <option value="TIM KANCIL (Pemain Kelahiran: 2022 / 2021 / 2020)">TIM KANCIL (Pemain Kelahiran: 2022 / 2021 / 2020)</option>
+                                <option value="TIM ANOA (Pemain Kelahiran: 2019 / 2018 / 2017)">TIM ANOA (Pemain Kelahiran: 2019 / 2018 / 2017)</option>
+                                <option value="TIM GARUDA (Pemain Kelahiran: 2016 / 2015)">TIM GARUDA (Pemain Kelahiran: 2016 / 2015)</option>
+                                <option value="TIM RAJAWALI (Pemain Kelahiran: 2014 / 2013)">TIM RAJAWALI (Pemain Kelahiran: 2014 / 2013)</option>
+                                <option value="TIM MALEO (Pemain Kelahiran: 2011 / 2012)">TIM MALEO (Pemain Kelahiran: 2011 / 2012)</option>
                             </select>
                         </div>
                         <div>
@@ -1402,7 +1500,7 @@
                         </div>
                         <div>
                             <label class="block font-semibold text-slate-700 mb-1">Tanggal Lahir</label>
-                            <input type="date" id="edit_tanggal_lahir" required class="w-full p-2 rounded border border-slate-300">
+                            <input type="date" id="edit_tanggal_lahir" required onchange="autoSelectTeamFromBirthDate('edit_tanggal_lahir', 'edit_kategori')" class="w-full p-2 rounded border border-slate-300">
                         </div>
                     </div>
                     <div>
@@ -1411,23 +1509,28 @@
                     </div>
                     <div class="grid sm:grid-cols-2 gap-3">
                         <div>
-                            <label class="block font-semibold text-slate-700 mb-1">Asal Sekolah</label>
+                            <label class="block font-semibold text-slate-700 mb-1">Sekolah saat ini</label>
                             <input type="text" id="edit_asal_sekolah" required class="w-full p-2 rounded border border-slate-300">
                         </div>
                         <div>
-                            <label class="block font-semibold text-slate-700 mb-1">No. HP Pemain</label>
-                            <input type="tel" id="edit_hp_pemain" required class="w-full p-2 rounded border border-slate-300">
+                            <label class="block font-semibold text-slate-700 mb-1">NPSN (Nomor Pokok Sekolah Nasional)</label>
+                            <input type="text" inputmode="numeric" maxlength="8" id="edit_npsn" class="w-full p-2 rounded border border-slate-300" placeholder="8 digit bila diketahui">
                         </div>
                     </div>
                     <div class="grid sm:grid-cols-2 gap-3">
                         <div>
-                            <label class="block font-semibold text-slate-700 mb-1">Nama Orang Tua</label>
-                            <input type="text" id="edit_orang_tua" required class="w-full p-2 rounded border border-slate-300">
+                            <label class="block font-semibold text-slate-700 mb-1">No. HP/WA Pemain</label>
+                            <input type="tel" id="edit_hp_pemain" class="w-full p-2 rounded border border-slate-300">
+                            <p class="text-[10px] text-slate-500 mt-1">Kosongkan jika menggunakan nomor orang tua.</p>
                         </div>
                         <div>
-                            <label class="block font-semibold text-slate-700 mb-1">No. HP Orang Tua</label>
-                            <input type="tel" id="edit_hp_ortu" required class="w-full p-2 rounded border border-slate-300">
+                            <label class="block font-semibold text-slate-700 mb-1">Nama Orang Tua (Ibu)</label>
+                            <input type="text" id="edit_orang_tua" required class="w-full p-2 rounded border border-slate-300" placeholder="Nama lengkap Ibu">
                         </div>
+                    </div>
+                    <div>
+                        <label class="block font-semibold text-slate-700 mb-1">No. HP Orang Tua</label>
+                        <input type="tel" id="edit_hp_ortu" required class="w-full p-2 rounded border border-slate-300">
                     </div>
 
                     <!-- Input Pembaharuan Photo & Berkas Document -->
@@ -1439,20 +1542,20 @@
 
                         <div class="grid sm:grid-cols-2 gap-3 bg-slate-50 p-3 rounded-xl border border-slate-200">
                             <div>
-                                <label class="block font-semibold text-slate-700 mb-1">Ganti Foto Pemain (JPEG/PNG)</label>
-                                <input type="file" id="edit_file_foto" accept="image/jpeg,image/png" class="text-[11px] w-full text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-[11px] file:font-semibold file:bg-maroon-700 file:text-white hover:file:bg-maroon-800">
+                                <label class="block font-semibold text-slate-700 mb-1">Ganti Foto Pemain (JPEG/PNG/WEBP)</label>
+                                <input type="file" id="edit_file_foto" accept="image/jpeg,image/png,image/webp,image/gif,image/heic,image/heif" class="text-[11px] w-full text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-[11px] file:font-semibold file:bg-maroon-700 file:text-white hover:file:bg-maroon-800">
                             </div>
                             <div>
-                                <label class="block font-semibold text-slate-700 mb-1">Ganti Akte Kelahiran (PDF)</label>
-                                <input type="file" id="edit_file_akte" accept="application/pdf" class="text-[11px] w-full text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-[11px] file:font-semibold file:bg-maroon-700 file:text-white hover:file:bg-maroon-800">
+                                <label class="block font-semibold text-slate-700 mb-1">Ganti Akte Kelahiran (PDF/Gambar)</label>
+                                <input type="file" id="edit_file_akte" accept="application/pdf,image/jpeg,image/png,image/webp,image/gif,image/heic,image/heif" class="text-[11px] w-full text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-[11px] file:font-semibold file:bg-maroon-700 file:text-white hover:file:bg-maroon-800">
                             </div>
                             <div>
-                                <label class="block font-semibold text-slate-700 mb-1">Ganti Ijazah Terakhir (PDF)</label>
-                                <input type="file" id="edit_file_ijazah" accept="application/pdf" class="text-[11px] w-full text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-[11px] file:font-semibold file:bg-maroon-700 file:text-white hover:file:bg-maroon-800">
+                                <label class="block font-semibold text-slate-700 mb-1">Ganti Ijazah Terakhir (PDF/Gambar)</label>
+                                <input type="file" id="edit_file_ijazah" accept="application/pdf,image/jpeg,image/png,image/webp,image/gif,image/heic,image/heif" class="text-[11px] w-full text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-[11px] file:font-semibold file:bg-maroon-700 file:text-white hover:file:bg-maroon-800">
                             </div>
                             <div>
-                                <label class="block font-semibold text-slate-700 mb-1">Ganti Rapor / NISN (PDF)</label>
-                                <input type="file" id="edit_file_rapor" accept="application/pdf" class="text-[11px] w-full text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-[11px] file:font-semibold file:bg-maroon-700 file:text-white hover:file:bg-maroon-800">
+                                <label class="block font-semibold text-slate-700 mb-1">Ganti Rapor / NISN (PDF/Gambar)</label>
+                                <input type="file" id="edit_file_rapor" accept="application/pdf,image/jpeg,image/png,image/webp,image/gif,image/heic,image/heif" class="text-[11px] w-full text-slate-500 file:mr-2 file:py-1 file:px-2.5 file:rounded-md file:border-0 file:text-[11px] file:font-semibold file:bg-maroon-700 file:text-white hover:file:bg-maroon-800">
                             </div>
                         </div>
                     </div>
@@ -1505,12 +1608,22 @@
         let galleryList = [];
         let attendanceLog = [];
         let ageCategories = [
-            'U-10 (Tahun Lahir 2016-2017)',
-            'U-12 (Tahun Lahir 2014-2015)',
-            'U-14 (Tahun Lahir 2012-2013)',
-            'U-16 (Tahun Lahir 2010-2011)',
-            'U-18 (Tahun Lahir 2008-2009)'
+            'TIM KANCIL (Pemain Kelahiran: 2022 / 2021 / 2020)',
+            'TIM ANOA (Pemain Kelahiran: 2019 / 2018 / 2017)',
+            'TIM GARUDA (Pemain Kelahiran: 2016 / 2015)',
+            'TIM RAJAWALI (Pemain Kelahiran: 2014 / 2013)',
+            'TIM MALEO (Pemain Kelahiran: 2011 / 2012)'
         ];
+        const TEAM_YEAR_MAP = {
+            2022: 'TIM KANCIL', 2021: 'TIM KANCIL', 2020: 'TIM KANCIL',
+            2019: 'TIM ANOA', 2018: 'TIM ANOA', 2017: 'TIM ANOA',
+            2016: 'TIM GARUDA', 2015: 'TIM GARUDA',
+            2014: 'TIM RAJAWALI', 2013: 'TIM RAJAWALI',
+            2012: 'TIM MALEO', 2011: 'TIM MALEO'
+        };
+        let sppPayments = [];
+        let editingSppPaymentId = null;
+        let selectedAttendanceMonth = '';
         let html5QrCode = null;
         const WSA_LOGO_FILE_ID = '14ZkhPuBhpanMS-PsZU-HODB9FnquZ9vX';
         const WSA_LOGO_URL = 'https://drive.google.com/file/d/' + WSA_LOGO_FILE_ID + '/view?usp=sharing';
@@ -1541,6 +1654,9 @@
             'saveHomePageImage',
             'loadAdminData',
             'loadAdminDataForTab',
+            'loadAttendanceForMonth',
+            'getSppReport',
+            'saveSppPayment',
             'saveAgeCategories',
             'saveAttendance',
             'saveEvaluation',
@@ -1663,6 +1779,37 @@
             img.src = img.dataset.wsaImageFallback || 'https://placehold.co/150x200/800000/ffffff?text=FOTO';
         }
 
+        function getTeamNameFromCategory(category) {
+            const text = String(category || '').trim();
+            const match = text.match(/^(TIM\s+(?:KANCIL|ANOA|GARUDA|RAJAWALI|MALEO))\b/i);
+            if (match) return match[1].toUpperCase().replace(/\s+/g, ' ');
+            return text ? text.split(' (')[0].trim() : '-';
+        }
+
+        function getPlayerTeamName(player) {
+            const year = Number(String(player && player.tanggal_lahir || '').slice(0, 4));
+            return TEAM_YEAR_MAP[year] || getTeamNameFromCategory(player && (player.tim || player.kategori));
+        }
+
+        function categoryOptionForTeam(teamName) {
+            const target = String(teamName || '').toLocaleUpperCase();
+            const match = normalizeAgeCategoryList(ageCategories).find(function (label) {
+                return getTeamNameFromCategory(label).toLocaleUpperCase() === target;
+            });
+            return match || teamName || '';
+        }
+
+        function autoSelectTeamFromBirthDate(dateInputId, selectId) {
+            const dateField = document.getElementById(dateInputId);
+            const select = document.getElementById(selectId);
+            if (!dateField || !select || !dateField.value) return;
+            const year = Number(dateField.value.slice(0, 4));
+            const team = TEAM_YEAR_MAP[year];
+            if (!team) return;
+            const optionValue = categoryOptionForTeam(team);
+            if (optionValue) select.value = optionValue;
+        }
+
         function normalizeAgeCategoryList(items) {
             const source = Array.isArray(items) ? items : [];
             const out = [];
@@ -1673,11 +1820,11 @@
                 if (label && !seen.has(key)) { seen.add(key); out.push(label); }
             });
             return out.length ? out : [
-                'U-10 (Tahun Lahir 2016-2017)',
-                'U-12 (Tahun Lahir 2014-2015)',
-                'U-14 (Tahun Lahir 2012-2013)',
-                'U-16 (Tahun Lahir 2010-2011)',
-                'U-18 (Tahun Lahir 2008-2009)'
+                'TIM KANCIL (Pemain Kelahiran: 2022 / 2021 / 2020)',
+                'TIM ANOA (Pemain Kelahiran: 2019 / 2018 / 2017)',
+                'TIM GARUDA (Pemain Kelahiran: 2016 / 2015)',
+                'TIM RAJAWALI (Pemain Kelahiran: 2014 / 2013)',
+                'TIM MALEO (Pemain Kelahiran: 2011 / 2012)'
             ];
         }
 
@@ -1689,7 +1836,7 @@
                 reg.replaceChildren();
                 const placeholder = document.createElement('option');
                 placeholder.value = '';
-                placeholder.textContent = '-- Pilih Kategori Usia --';
+                placeholder.textContent = '-- Pilih Nama Tim berdasarkan Tahun Lahir --';
                 reg.appendChild(placeholder);
                 cats.forEach(function (label) {
                     const option = document.createElement('option');
@@ -2022,7 +2169,7 @@
         }
 
         function switchAdminSubTab(subTab, skipRefresh) {
-            const tabs = ['players', 'attendance', 'grading', 'rekap-nilai', 'content', 'settings'];
+            const tabs = ['players', 'attendance', 'spp', 'grading', 'rekap-nilai', 'content', 'settings'];
             tabs.forEach(t => {
                 const el = document.getElementById(`admin-subtab-${t}`);
                 const btn = document.getElementById(`admin-subtab-${t}-btn`);
@@ -2063,7 +2210,17 @@
                     renderAgeCategoryManager();
                 }
                 if (subTab === 'players') renderAdminPlayersTable();
-                else if (subTab === 'attendance') renderAttendanceLog();
+                else if (subTab === 'attendance') {
+                    const monthField = document.getElementById('attendance_month');
+                    if (monthField && !monthField.value) monthField.value = currentMonthValue();
+                    await loadAttendanceMonthReport();
+                }
+                else if (subTab === 'spp') {
+                    const monthField = document.getElementById('spp_month');
+                    if (monthField && !monthField.value) monthField.value = currentMonthValue();
+                    populateSppPlayerOptions();
+                    await loadSppReport();
+                }
                 else if (subTab === 'grading') populateVerifiedPlayersSelect();
                 else if (subTab === 'rekap-nilai') renderRekapNilaiTable();
                 else if (subTab === 'content') { renderNews(); renderGallery(); renderContentManagement(); }
@@ -2130,7 +2287,7 @@
             document.getElementById('card_tempat_lahir').innerText = player.tempat_lahir || '-';
             document.getElementById('card_tanggal_lahir').innerText = player.tanggal_lahir || '-';
             document.getElementById('card_hp_pemain').innerText = player.hp_pemain || '-';
-            document.getElementById('card_kategori').innerText = String(player.kategori || '-').split(' ')[0];
+            document.getElementById('card_kategori').innerText = getPlayerTeamName(player);
             document.getElementById('card_alamat').innerText = player.alamat || '-';
             document.getElementById('card_id_code').innerText = `ID: ${player.id}`;
             setImageWithFallback(document.getElementById('card_photo'), player.foto, 'w600', 'https://placehold.co/150x200/800000/ffffff?text=FOTO');
@@ -2186,7 +2343,8 @@
                     tanggal_lahir: document.getElementById('reg_tanggal_lahir').value,
                     alamat: document.getElementById('reg_alamat').value,
                     asal_sekolah: document.getElementById('reg_asal_sekolah').value,
-                    hp_pemain: document.getElementById('reg_hp_pemain').value,
+                    npsn: document.getElementById('reg_npsn').value.trim(),
+                    hp_pemain: document.getElementById('reg_hp_pemain').value.trim() || document.getElementById('reg_hp_ortu').value.trim(),
                     posisi: document.getElementById('reg_posisi').value,
                     kaki: document.getElementById('reg_kaki').value,
                     orang_tua: document.getElementById('reg_orang_tua').value,
@@ -2316,7 +2474,7 @@
                     name.textContent = p.nama || '-';
                     const info = document.createElement('p');
                     info.className = 'text-xs text-slate-500';
-                    info.textContent = String((p.kategori || '').split(' ')[0]) + ' | NISN: ' + (p.nisn || '-') + ' | Posisi: ' + (p.posisi || '-');
+                    info.textContent = String(p.tim || getTeamNameFromCategory(p.kategori) || '-') + ' | NISN: ' + (p.nisn || '-') + ' | Posisi: ' + (p.posisi || '-');
                     detail.appendChild(name);
                     detail.appendChild(info);
                     left.appendChild(photo);
@@ -2362,6 +2520,10 @@
                 renderNarratives();
                 renderAgeCategoryOptions();
                 renderAgeCategoryManager();
+                const attendanceMonthField = document.getElementById('attendance_month');
+                if (attendanceMonthField && !attendanceMonthField.value) attendanceMonthField.value = currentMonthValue();
+                const sppMonthField = document.getElementById('spp_month');
+                if (sppMonthField && !sppMonthField.value) sppMonthField.value = currentMonthValue();
                 renderAdminPlayersTable();
                 renderAttendanceLog();
                 renderRekapNilaiTable();
@@ -2414,13 +2576,13 @@
                         </div>
                     </td>
                     <td class="p-3 font-mono text-slate-600">${escapeHtml(p.nisn)}</td>
-                    <td class="p-3 font-medium text-slate-700">${escapeHtml((p.kategori || '').split(' ')[0])}</td>
+                    <td class="p-3 font-medium text-slate-700">${escapeHtml(getPlayerTeamName(p))}</td>
                     <td class="p-3 font-medium text-slate-700">${escapeHtml(p.posisi)}</td>
                     <td class="p-3 text-slate-500">
                         <div class="space-y-0.5 text-[10px]">
-                            <span class="inline-flex items-center text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-semibold"><i class="fa-solid fa-file-pdf mr-1 text-rose-600"></i> ${escapeHtml(p.file_akte || 'Akte.pdf')}</span><br>
-                            <span class="inline-flex items-center text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-semibold"><i class="fa-solid fa-file-pdf mr-1 text-rose-600"></i> ${escapeHtml(p.file_ijazah || 'Ijazah.pdf')}</span><br>
-                            <span class="inline-flex items-center text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-semibold"><i class="fa-solid fa-file-pdf mr-1 text-rose-600"></i> ${escapeHtml(p.file_rapor || 'Rapor.pdf')}</span>
+                            <span class="inline-flex items-center text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-semibold"><i class="fa-solid fa-file-lines mr-1 text-rose-600"></i> ${escapeHtml(p.file_akte || 'Akte.pdf')}</span><br>
+                            <span class="inline-flex items-center text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-semibold"><i class="fa-solid fa-file-lines mr-1 text-rose-600"></i> ${escapeHtml(p.file_ijazah || 'Ijazah.pdf')}</span><br>
+                            <span class="inline-flex items-center text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-semibold"><i class="fa-solid fa-file-lines mr-1 text-rose-600"></i> ${escapeHtml(p.file_rapor || 'Rapor.pdf')}</span>
                         </div>
                     </td>
                     <td class="p-3">
@@ -2483,14 +2645,16 @@
             document.getElementById('edit_player_id').value = p.id;
             document.getElementById('edit_nama').value = p.nama;
             document.getElementById('edit_nisn').value = p.nisn;
-            renderAgeCategoryOptions(p.kategori);
-            document.getElementById('edit_kategori').value = p.kategori;
+            renderAgeCategoryOptions(categoryOptionForTeam(getPlayerTeamName(p)));
+            document.getElementById('edit_kategori').value = categoryOptionForTeam(getPlayerTeamName(p));
             document.getElementById('edit_posisi').value = p.posisi;
             document.getElementById('edit_tempat_lahir').value = p.tempat_lahir;
             document.getElementById('edit_tanggal_lahir').value = p.tanggal_lahir;
+            autoSelectTeamFromBirthDate('edit_tanggal_lahir', 'edit_kategori');
             document.getElementById('edit_alamat').value = p.alamat;
-            document.getElementById('edit_asal_sekolah').value = p.asal_sekolah;
-            document.getElementById('edit_hp_pemain').value = p.hp_pemain;
+            document.getElementById('edit_asal_sekolah').value = p.asal_sekolah || '';
+            document.getElementById('edit_npsn').value = p.npsn || '';
+            document.getElementById('edit_hp_pemain').value = p.hp_pemain || p.hp_ortu || '';
             document.getElementById('edit_orang_tua').value = p.orang_tua;
             document.getElementById('edit_hp_ortu').value = p.hp_ortu;
 
@@ -2498,9 +2662,9 @@
             setImageWithFallback(document.getElementById('edit_preview_foto'), p.foto, 'w200', 'https://placehold.co/100x100/800000/ffffff?text=WSA');
             document.getElementById('edit_preview_nama').innerText = p.nama;
             document.getElementById('edit_preview_id').innerText = `ID: ${p.id} | NISN: ${p.nisn}`;
-            document.getElementById('edit_preview_akte').innerHTML = `<i class="fa-solid fa-file-pdf text-rose-600 mr-1"></i> Akte: <span class="font-semibold text-emerald-700">${escapeHtml(p.file_akte || 'Akte.pdf')}</span>`;
-            document.getElementById('edit_preview_ijazah').innerHTML = `<i class="fa-solid fa-file-pdf text-rose-600 mr-1"></i> Ijazah: <span class="font-semibold text-emerald-700">${escapeHtml(p.file_ijazah || 'Ijazah.pdf')}</span>`;
-            document.getElementById('edit_preview_rapor').innerHTML = `<i class="fa-solid fa-file-pdf text-rose-600 mr-1"></i> Rapor: <span class="font-semibold text-emerald-700">${escapeHtml(p.file_rapor || 'Rapor.pdf')}</span>`;
+            document.getElementById('edit_preview_akte').innerHTML = `<i class="fa-solid fa-file-lines text-rose-600 mr-1"></i> Akte: <span class="font-semibold text-emerald-700">${escapeHtml(p.file_akte || 'Akte.pdf')}</span>`;
+            document.getElementById('edit_preview_ijazah').innerHTML = `<i class="fa-solid fa-file-lines text-rose-600 mr-1"></i> Ijazah: <span class="font-semibold text-emerald-700">${escapeHtml(p.file_ijazah || 'Ijazah.pdf')}</span>`;
+            document.getElementById('edit_preview_rapor').innerHTML = `<i class="fa-solid fa-file-lines text-rose-600 mr-1"></i> Rapor: <span class="font-semibold text-emerald-700">${escapeHtml(p.file_rapor || 'Rapor.pdf')}</span>`;
 
             // Clear file inputs
             document.getElementById('edit_file_foto').value = '';
@@ -2528,7 +2692,8 @@
                 tanggal_lahir: document.getElementById('edit_tanggal_lahir').value,
                 alamat: document.getElementById('edit_alamat').value,
                 asal_sekolah: document.getElementById('edit_asal_sekolah').value,
-                hp_pemain: document.getElementById('edit_hp_pemain').value,
+                npsn: document.getElementById('edit_npsn').value.trim(),
+                hp_pemain: document.getElementById('edit_hp_pemain').value.trim() || document.getElementById('edit_hp_ortu').value.trim(),
                 orang_tua: document.getElementById('edit_orang_tua').value,
                 hp_ortu: document.getElementById('edit_hp_ortu').value
             };
@@ -2604,13 +2769,13 @@
                 return;
             }
             const logItem = {
-                id: player.id, nama: player.nama, kategori: player.kategori,
+                id: player.id, nama: player.nama, kategori: getPlayerTeamName(player),
                 time: `${dateString} ${timeString}`, status: 'Hadir'
             };
             try {
                 const saved = await apiCall('saveAttendance', adminToken, logItem);
-                attendanceLog.unshift(saved);
-                renderAttendanceLog();
+                const savedForMonth = Object.assign({}, saved, { dateKey: currentMonthValue() + '-' + String(new Date().getDate()).padStart(2, '0') });
+                if (!selectedAttendanceMonth || selectedAttendanceMonth === currentMonthValue()) { attendanceLog.unshift(savedForMonth); renderAttendanceLog(); }
                 notifyUser(`Presensi Berhasil!\nNama: ${player.nama}\nID: ${player.id}\nWaktu: ${timeString}`, 'success');
             } catch (err) { showApiError(err); }
         }
@@ -2621,12 +2786,37 @@
             // Optional continuous scanning error callback
         }
 
+        function currentMonthValue() {
+            const now = new Date();
+            return now.getFullYear() + '-' + String(now.getMonth() + 1).padStart(2, '0');
+        }
+
+        function prettyMonthLabel(value) {
+            if (!/^\d{4}-\d{2}$/.test(String(value || ''))) return String(value || '-');
+            const parts = value.split('-').map(Number);
+            return new Date(parts[0], parts[1] - 1, 1).toLocaleDateString('id-ID', { month: 'long', year: 'numeric' });
+        }
+
+        async function loadAttendanceMonthReport() {
+            if (!adminToken) return notifyUser('Silakan login admin terlebih dahulu.', 'warning');
+            const field = document.getElementById('attendance_month');
+            const month = field && field.value ? field.value : currentMonthValue();
+            if (field) field.value = month;
+            selectedAttendanceMonth = month;
+            try {
+                attendanceLog = await apiCall('loadAttendanceForMonth', adminToken, month) || [];
+                renderAttendanceLog();
+                const summary = document.getElementById('attendance_month_summary');
+                if (summary) summary.textContent = 'Laporan ' + prettyMonthLabel(month) + ': ' + attendanceLog.length + ' catatan presensi.';
+            } catch (err) { showApiError(err); }
+        }
+
         function renderAttendanceLog() {
             const container = document.getElementById('attendance_log_container');
             container.innerHTML = '';
 
             if (attendanceLog.length === 0) {
-                container.innerHTML = `<p class="text-xs text-slate-400 text-center py-4">Belum ada rekapan absensi hari ini.</p>`;
+                container.innerHTML = `<p class="text-xs text-slate-400 text-center py-4">Belum ada rekapan absensi untuk bulan yang dipilih.</p>`;
                 return;
             }
 
@@ -2636,7 +2826,7 @@
                 item.innerHTML = `
                     <div>
                         <p class="font-bold text-slate-800">${escapeHtml(log.nama)} <span class="font-mono text-maroon-700">(${escapeHtml(log.id)})</span></p>
-                        <p class="text-[10px] text-slate-500">${escapeHtml((log.kategori || '').split(' ')[0])} | ${escapeHtml(log.time)}</p>
+                        <p class="text-[10px] text-slate-500">${escapeHtml(getTeamNameFromCategory(log.kategori))} | ${escapeHtml(log.dateKey || '')} ${escapeHtml(log.time)}</p>
                     </div>
                     <span class="px-2 py-0.5 bg-emerald-100 text-emerald-800 font-bold rounded text-[10px]">Hadir</span>
                 `;
@@ -2647,8 +2837,8 @@
         async function clearAttendanceLog() {
             if (!(await askUserConfirmation('Reset seluruh log presensi hari ini?'))) return;
             try {
-                attendanceLog = await apiCall('clearTodayAttendance', adminToken);
-                renderAttendanceLog();
+                await apiCall('clearTodayAttendance', adminToken);
+                await loadAttendanceMonthReport();
             } catch (err) { showApiError(err); }
         }
 
@@ -2665,7 +2855,7 @@
             }
 
             select.innerHTML = '<option value="">-- Pilih Pemain Terverifikasi --</option>' + 
-                verified.map(p => `<option value="${escapeHtml(p.id)}">${escapeHtml(p.nama)} (${escapeHtml(p.id)}) - ${escapeHtml((p.kategori || '').split(' ')[0])}</option>`).join('');
+                verified.map(p => `<option value="${escapeHtml(p.id)}">${escapeHtml(p.nama)} (${escapeHtml(p.id)}) - ${escapeHtml(getPlayerTeamName(p))}</option>`).join('');
         }
 
         function populatePlayerEvalInfo() {
@@ -2675,7 +2865,7 @@
 
             if (player) {
                 document.getElementById('prev_nama').innerText = `${player.nama} (${player.id})`;
-                document.getElementById('prev_info').innerText = `Kategori: ${player.kategori} | Posisi: ${player.posisi} | NISN: ${player.nisn}`;
+                document.getElementById('prev_info').innerText = `Tim: ${getPlayerTeamName(player)} | Posisi: ${player.posisi} | NISN: ${player.nisn}`;
                 preview.classList.remove('hidden');
             } else {
                 preview.classList.add('hidden');
@@ -2722,6 +2912,15 @@
                     mental: Math.round(mentAvg * 10) / 10,
                     disiplin: Math.round(discAvg * 10) / 10
                 },
+                componentScores: Object.fromEntries(
+                    ['score_a1','score_a2','score_a3','score_a4','score_a5',
+                     'score_b1','score_b2','score_b3','score_b4','score_b5',
+                     'score_c1','score_c2','score_c3','score_c4','score_c5',
+                     'score_d1','score_d2','score_d3','score_d4','score_d5',
+                     'score_e1','score_e2','score_e3','score_e4'].map(function (id) {
+                        return [id, Number(document.getElementById(id).value)];
+                    })
+                ),
                 nilaiAkhir: Math.round(finalScore * 10) / 10,
                 predikat: getPredikat(finalScore),
                 catatan: document.getElementById('eval_catatan').value
@@ -2737,6 +2936,143 @@
                     : 'Penilaian rapor berhasil disimpan. Nilai akhir: ' + saved.nilaiAkhir + ' (' + saved.predikat + ').', 'success');
                 switchAdminSubTab('rekap-nilai');
             } catch (err) { showApiError(err); }
+        }
+
+        function populateSppPlayerOptions() {
+            const select = document.getElementById('spp_player_id');
+            if (!select) return;
+            const previous = select.value;
+            const list = Array.isArray(players) ? players : [];
+            select.replaceChildren();
+            const placeholder = document.createElement('option');
+            placeholder.value = '';
+            placeholder.textContent = '-- Pilih Pemain --';
+            select.appendChild(placeholder);
+            list.slice().sort(function (a, b) { return String(a.nama || '').localeCompare(String(b.nama || ''), 'id'); }).forEach(function (p) {
+                const option = document.createElement('option');
+                option.value = p.id;
+                option.textContent = (p.nama || '-') + ' — ' + getPlayerTeamName(p) + ' (' + (p.id || '-') + ')';
+                select.appendChild(option);
+            });
+            if (previous && list.some(function (p) { return String(p.id) === String(previous); })) select.value = previous;
+        }
+
+        function formatRupiah(amount) {
+            return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', maximumFractionDigits: 0 }).format(Number(amount || 0));
+        }
+
+        async function loadSppReport() {
+            if (!adminToken) return notifyUser('Silakan login admin terlebih dahulu.', 'warning');
+            const field = document.getElementById('spp_month');
+            const month = field && field.value ? field.value : currentMonthValue();
+            if (field) field.value = month;
+            try {
+                const report = await apiCall('getSppReport', adminToken, month);
+                sppPayments = report && Array.isArray(report.payments) ? report.payments : [];
+                renderSppReport(report || { month: month, payments: [], summary: {} });
+            } catch (err) { showApiError(err); }
+        }
+
+        function renderSppReport(report) {
+            const month = report.month || (document.getElementById('spp_month') && document.getElementById('spp_month').value) || currentMonthValue();
+            const summary = report.summary || {};
+            const payments = Array.isArray(report.payments) ? report.payments : [];
+            const title = document.getElementById('spp_report_month_title');
+            if (title) title.textContent = 'Periode: ' + prettyMonthLabel(month);
+            const totalPaid = document.getElementById('spp_total_paid');
+            const totalOut = document.getElementById('spp_total_outstanding');
+            const paidCount = document.getElementById('spp_paid_count');
+            const unpaidCount = document.getElementById('spp_unpaid_count');
+            const count = document.getElementById('spp_report_count');
+            if (totalPaid) totalPaid.textContent = formatRupiah(summary.totalPaid || 0);
+            if (totalOut) totalOut.textContent = formatRupiah(summary.totalOutstanding || 0);
+            if (paidCount) paidCount.textContent = (summary.paidCount || 0) + ' pembayaran lunas';
+            if (unpaidCount) unpaidCount.textContent = (summary.unpaidCount || 0) + ' belum lunas';
+            if (count) count.textContent = payments.length + ' catatan pembayaran untuk ' + prettyMonthLabel(month) + '.';
+            const body = document.getElementById('spp_table_body');
+            if (!body) return;
+            if (!payments.length) {
+                body.innerHTML = '<tr><td colspan="5" class="p-4 text-center text-slate-400">Belum ada catatan SPP pada bulan ini.</td></tr>';
+                return;
+            }
+            body.innerHTML = payments.map(function (item) {
+                const paid = item.status === 'Lunas';
+                return '<tr class="hover:bg-slate-50">' +
+                    '<td class="p-3"><p class="font-bold text-slate-800">' + escapeHtml(item.playerName || '-') + '</p><p class="text-[10px] text-slate-500">' + escapeHtml(item.tim || '-') + ' · ' + escapeHtml(item.playerId || '-') + '</p>' +
+                    (item.note ? '<p class="text-[10px] text-slate-500 mt-1">' + escapeHtml(item.note) + '</p>' : '') + '</td>' +
+                    '<td class="p-3 font-semibold">' + escapeHtml(formatRupiah(item.amount || 0)) + '</td>' +
+                    '<td class="p-3"><span class="px-2 py-1 rounded-full text-[10px] font-bold ' + (paid ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800') + '">' + escapeHtml(item.status || 'Belum Lunas') + '</span></td>' +
+                    '<td class="p-3">' + escapeHtml(item.paidDate || '-') + '</td>' +
+                    '<td class="p-3"><button type="button" data-spp-edit="' + escapeHtml(item.id || '') + '" class="px-2.5 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-[10px] font-bold rounded"><i class="fa-solid fa-pen mr-1"></i>Edit</button></td>' +
+                    '</tr>';
+            }).join('');
+            body.querySelectorAll('[data-spp-edit]').forEach(function (button) {
+                button.addEventListener('click', function () { editSppPayment(button.getAttribute('data-spp-edit')); });
+            });
+        }
+
+        function editSppPayment(id) {
+            const item = sppPayments.find(function (payment) { return String(payment.id) === String(id); });
+            if (!item) return notifyUser('Catatan SPP tidak ditemukan. Muat ulang laporan bulan ini.', 'warning');
+            editingSppPaymentId = item.id;
+            document.getElementById('spp_payment_id').value = item.id || '';
+            document.getElementById('spp_player_id').value = item.playerId || '';
+            document.getElementById('spp_month').value = item.month || currentMonthValue();
+            document.getElementById('spp_amount').value = String(item.amount || '');
+            document.getElementById('spp_status').value = item.status || 'Belum Lunas';
+            document.getElementById('spp_paid_date').value = item.paidDate || '';
+            document.getElementById('spp_note').value = item.note || '';
+            const button = document.getElementById('spp_save_button');
+            if (button) button.innerHTML = '<i class="fa-solid fa-floppy-disk mr-1"></i> Simpan Perubahan SPP';
+            document.getElementById('spp_form_notice').textContent = 'Mode edit: memperbarui catatan untuk pemain dan bulan ini.';
+            document.getElementById('sppPaymentForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function resetSppForm() {
+            const monthField = document.getElementById('spp_month');
+            const reportMonth = monthField && monthField.value ? monthField.value : currentMonthValue();
+            const form = document.getElementById('sppPaymentForm');
+            if (form) form.reset();
+            editingSppPaymentId = null;
+            document.getElementById('spp_payment_id').value = '';
+            document.getElementById('spp_month').value = reportMonth;
+            const button = document.getElementById('spp_save_button');
+            if (button) button.innerHTML = '<i class="fa-solid fa-floppy-disk mr-1"></i> Simpan Pembayaran';
+            const notice = document.getElementById('spp_form_notice');
+            if (notice) notice.textContent = 'Satu catatan pembayaran aktif untuk setiap pemain per bulan. Menyimpan lagi akan memperbarui catatan tersebut.';
+        }
+
+        async function handleSaveSppPayment(event) {
+            event.preventDefault();
+            if (!adminToken) return notifyUser('Silakan login admin terlebih dahulu.', 'warning');
+            const payment = {
+                id: document.getElementById('spp_payment_id').value || editingSppPaymentId || '',
+                playerId: document.getElementById('spp_player_id').value,
+                month: document.getElementById('spp_month').value,
+                amount: Number(document.getElementById('spp_amount').value),
+                status: document.getElementById('spp_status').value,
+                paidDate: document.getElementById('spp_paid_date').value,
+                note: document.getElementById('spp_note').value
+            };
+            const button = document.getElementById('spp_save_button');
+            const original = button ? button.innerHTML : '';
+            if (button) { button.disabled = true; button.innerHTML = '<i class="fa-solid fa-spinner fa-spin mr-1"></i Menyimpan...'; }
+            try {
+                const saved = await apiCall('saveSppPayment', adminToken, payment);
+                notifyUser('Pembayaran SPP berhasil disimpan untuk ' + saved.playerName + ' — ' + prettyMonthLabel(saved.month) + '.', 'success');
+                await loadSppReport();
+                resetSppForm();
+            } catch (err) { showApiError(err); }
+            finally { if (button) { button.disabled = false; button.innerHTML = original || '<i class="fa-solid fa-floppy-disk mr-1"></i> Simpan Pembayaran'; } }
+        }
+
+        function exportSppCSV() {
+            if (!sppPayments.length) return notifyUser('Belum ada catatan pembayaran SPP untuk diekspor.', 'warning');
+            let csv = 'Bulan,ID Pemain,Nama Pemain,Nama Tim,Nominal,Status,Tanggal Bayar,Catatan\n';
+            sppPayments.forEach(function (item) {
+                csv += '"' + [item.month, item.playerId, item.playerName, item.tim, item.amount, item.status, item.paidDate || '', item.note || ''].map(function (value) { return String(value == null ? '' : value).replace(/"/g, '""'); }).join('","') + '"\n';
+            });
+            downloadCSV(csv, 'Laporan_SPP_' + (document.getElementById('spp_month').value || currentMonthValue()) + '.csv');
         }
 
         function resetEvaluationEditor(resetForm) {
@@ -2787,16 +3123,19 @@
                 [['score_e1','score_e2','score_e3','score_e4'], ev.scores && ev.scores.disiplin]
             ];
             groups.forEach(function (group) {
-                const value = Number(group[1] || 0);
+                const fallbackAverage = Number(group[1] || 0);
                 group[0].forEach(function (fieldId) {
                     const field = document.getElementById(fieldId);
-                    if (field) field.value = String(value);
+                    if (!field) return;
+                    const stored = ev.componentScores && ev.componentScores[fieldId];
+                    field.value = String(stored !== undefined && stored !== null && stored !== '' ? stored : fallbackAverage);
                 });
             });
             populatePlayerEvalInfo();
             const notice = document.getElementById('evaluation-edit-notice');
             const noticeText = document.getElementById('evaluation-edit-notice-text');
-            if (noticeText) noticeText.textContent = 'Mengedit rapor ' + ev.id + ' — ' + player.nama + ', periode ' + ev.periode + '.';
+            const hasStoredComponents = ev.componentScores && Object.keys(ev.componentScores).length > 0;
+            if (noticeText) noticeText.textContent = 'Mengedit rapor ' + ev.id + ' — ' + player.nama + ', periode ' + ev.periode + '.' + (hasStoredComponents ? '' : ' Catatan: rapor lama hanya menyimpan rata-rata kategori; nilai tiap komponen asli tidak tersedia. Nilai rata-rata akan diisi sebagai nilai awal.');
             if (notice) notice.classList.remove('hidden');
             const save = document.getElementById('save-evaluation-button');
             if (save) save.innerHTML = '<i class="fa-solid fa-floppy-disk mr-1"></i> Simpan Perubahan Rapor';
@@ -2833,7 +3172,7 @@
                         <p class="font-bold text-slate-800">${escapeHtml(player.nama)}</p>
                         <span class="font-mono text-[10px] text-maroon-700 font-bold">${escapeHtml(ev.playerId)}</span>
                     </td>
-                    <td class="p-3 text-slate-600">${escapeHtml((player.kategori || '').split(' ')[0])} / ${escapeHtml(player.posisi)}</td>
+                    <td class="p-3 text-slate-600">${escapeHtml(getPlayerTeamName(player))} / ${escapeHtml(player.posisi)}</td>
                     <td class="p-3 font-semibold text-slate-700">${escapeHtml(ev.periode)}</td>
                     <td class="p-3 text-center font-semibold text-slate-700">${ev.scores.teknik}</td>
                     <td class="p-3 text-center font-semibold text-slate-700">${ev.scores.taktik}</td>
@@ -2898,7 +3237,7 @@
                         <div class="space-y-1 text-xs">
                             <p><span class="font-bold text-slate-500 uppercase">Nama Pemain:</span> <strong class="text-slate-900 text-sm block">${escapeHtml(p.nama)}</strong></p>
                             <p><span class="font-bold text-slate-500 uppercase">NISN / ID Pemain:</span> ${escapeHtml(p.nisn)} (${escapeHtml(p.id)})</p>
-                            <p><span class="font-bold text-slate-500 uppercase">Kategori Usia & Posisi:</span> ${escapeHtml((p.kategori || '').split(' ')[0])} | ${escapeHtml(p.posisi)}</p>
+                            <p><span class="font-bold text-slate-500 uppercase">Nama Tim & Posisi:</span> ${escapeHtml(getPlayerTeamName(p))} | ${escapeHtml(p.posisi)}</p>
                         </div>
                     </div>
                     <div class="text-xs space-y-1 border-l border-slate-300 pl-4">
@@ -3141,20 +3480,20 @@
 
         function exportPlayersCSV() {
             if (players.length === 0) return notifyUser('Tidak ada data pemain untuk di-export.', 'warning');
-            let csv = 'ID,Nama,NISN,Kategori,Posisi,Tempat Lahir,Tanggal Lahir,HP Pemain,Orang Tua,HP Ortu,Akte,Ijazah,Rapor,Status\n';
+            let csv = 'ID,Nama,NISN,Nama Tim,Sekolah Saat Ini,NPSN,Posisi,Tempat Lahir,Tanggal Lahir,HP Pemain,Orang Tua (Ibu),HP Ortu,Akte,Ijazah,Rapor,Status\n';
             players.forEach(p => {
-                csv += `"${p.id}","${p.nama}","${p.nisn}","${p.kategori}","${p.posisi}","${p.tempat_lahir}","${p.tanggal_lahir}","${p.hp_pemain}","${p.orang_tua}","${p.hp_ortu}","${p.file_akte || ''}","${p.file_ijazah || ''}","${p.file_rapor || ''}","${p.status}"\n`;
+                csv += `"${p.id}","${p.nama}","${p.nisn}","${getPlayerTeamName(p)}","${p.asal_sekolah || ''}","${p.npsn || ''}","${p.posisi}","${p.tempat_lahir}","${p.tanggal_lahir}","${p.hp_pemain}","${p.orang_tua}","${p.hp_ortu}","${p.file_akte || ''}","${p.file_ijazah || ''}","${p.file_rapor || ''}","${p.status}"\n`;
             });
             downloadCSV(csv, 'Data_Pemain_Witan_Sulaeman_Akademi.csv');
         }
 
         function exportAttendanceCSV() {
             if (attendanceLog.length === 0) return notifyUser('Tidak ada rekapan absensi.', 'warning');
-            let csv = 'ID,Nama,Kategori,Waktu,Status\n';
+            let csv = 'Tanggal,ID,Nama,Tim,Waktu,Status\n';
             attendanceLog.forEach(l => {
-                csv += `"${l.id}","${l.nama}","${l.kategori}","${l.time}","${l.status}"\n`;
+                csv += `"${l.dateKey || ''}","${l.id}","${l.nama}","${l.kategori}","${l.time}","${l.status}"\n`;
             });
-            downloadCSV(csv, 'Rekap_Absensi_Latihan.csv');
+            downloadCSV(csv, 'Rekap_Absensi_' + (selectedAttendanceMonth || currentMonthValue()) + '.csv');
         }
 
         function exportRekapNilaiCSV() {
@@ -3191,6 +3530,10 @@
                 'stopQrScanner()': stopQrScanner,
                 'exportAttendanceCSV()': exportAttendanceCSV,
                 'clearAttendanceLog()': clearAttendanceLog,
+                'loadAttendanceMonthReport()': loadAttendanceMonthReport,
+                'loadSppReport()': loadSppReport,
+                'exportSppCSV()': exportSppCSV,
+                'resetSppForm()': resetSppForm,
                 'exportRekapNilaiCSV()': exportRekapNilaiCSV,
                 'closeEditPlayerModal()': closeEditPlayerModal,
                 'printPlayerRapor()': printPlayerRapor,
@@ -3230,7 +3573,8 @@
 
             const submitHandlers = {
                 registrationForm: handleRegistration,
-                evaluationForm: handleSaveEvaluation
+                evaluationForm: handleSaveEvaluation,
+                sppPaymentForm: handleSaveSppPayment
             };
             Object.keys(submitHandlers).forEach(function (id) {
                 const form = document.getElementById(id);
@@ -3241,7 +3585,7 @@
             // Content/settings/edit forms all use their original form elements and handlers.
             document.querySelectorAll('form[onsubmit]').forEach(function (form) {
                 const expression = String(form.getAttribute('onsubmit') || '').trim();
-                const match = expression.match(/^(handleAddNews|handleAddGallery|handleSaveNarrative|handleSaveHomePageImage|handleChangePassword|handleSaveEditPlayer|handleAddAgeCategory)\(event\)$/);
+                const match = expression.match(/^(handleAddNews|handleAddGallery|handleSaveNarrative|handleSaveHomePageImage|handleChangePassword|handleSaveEditPlayer|handleAddAgeCategory|handleSaveSppPayment)\(event\)$/);
                 if (!match) return;
                 const handlers = {
                     handleAddNews: handleAddNews,
@@ -3250,7 +3594,8 @@
                     handleSaveHomePageImage: handleSaveHomePageImage,
                     handleChangePassword: handleChangePassword,
                     handleSaveEditPlayer: handleSaveEditPlayer,
-                    handleAddAgeCategory: handleAddAgeCategory
+                    handleAddAgeCategory: handleAddAgeCategory,
+                    handleSaveSppPayment: handleSaveSppPayment
                 };
                 form.removeAttribute('onsubmit');
                 form.addEventListener('submit', handlers[match[1]]);
@@ -3272,6 +3617,10 @@
                 evalPlayer.removeAttribute('onchange');
                 evalPlayer.addEventListener('change', populatePlayerEvalInfo);
             }
+            const regBirth = document.getElementById('reg_tanggal_lahir');
+            if (regBirth) regBirth.addEventListener('change', function () { autoSelectTeamFromBirthDate('reg_tanggal_lahir', 'reg_kategori'); });
+            const editBirth = document.getElementById('edit_tanggal_lahir');
+            if (editBirth) editBirth.addEventListener('change', function () { autoSelectTeamFromBirthDate('edit_tanggal_lahir', 'edit_kategori'); });
         }
 
         // Explicitly publish handlers used by inline HTML attributes in HtmlService.
@@ -3281,7 +3630,9 @@
             switchTab, toggleMobileMenu, switchAdminSubTab,
             handleRegistration, printPlayerCard, performPublicSearch,
             handleAdminLogin, handleAdminLogout, exportPlayersCSV,
-            startQrScanner, stopQrScanner, exportAttendanceCSV, clearAttendanceLog,
+            startQrScanner, stopQrScanner, exportAttendanceCSV, clearAttendanceLog, loadAttendanceMonthReport,
+            populateSppPlayerOptions, loadSppReport, renderSppReport, editSppPayment, resetSppForm, handleSaveSppPayment, exportSppCSV,
+            autoSelectTeamFromBirthDate, getPlayerTeamName,
             handleSaveEvaluation, exportRekapNilaiCSV, handleAddNews, handleAddGallery,
             handleSaveNarrative, handleSaveHomePageImage, previewHomePageImage, handleChangePassword, closeEditPlayerModal,
             handleSaveEditPlayer, handleAddAgeCategory, removeAgeCategory, handleDriveImageError,
@@ -3290,8 +3641,8 @@
             renderAdminPlayersTable, renderRekapNilaiTable, renderNews, renderGallery,
             populatePlayerEvalInfo, changePlayerStatus
         });
-        window.__WSA_BUILD = '1.4.3';
-        console.info('WSA Cloudflare frontend build 1.4.3 loaded.');
+        window.__WSA_BUILD = '1.5.0';
+        console.info('WSA Cloudflare frontend build 1.5.0 loaded.');
 
         // Initialize independently so a rendering error cannot silently prevent the backend check.
         window.addEventListener('DOMContentLoaded', async () => {
