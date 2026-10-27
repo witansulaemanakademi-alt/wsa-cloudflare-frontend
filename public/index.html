@@ -34,6 +34,41 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+        /* Foto hero: bentuk organik (bukan kotak/bulat) dengan gradasi transparan
+           agar menyatu lembut dengan latar maroon. Hanya memengaruhi foto Beranda. */
+        .hero-home-visual {
+            position: relative;
+            isolation: isolate;
+            width: clamp(230px, 31vw, 390px);
+            height: clamp(220px, 27vw, 330px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .hero-home-visual::before {
+            content: '';
+            position: absolute;
+            inset: 8% 8% 10% 8%;
+            z-index: -1;
+            border-radius: 50%;
+            background: radial-gradient(ellipse, rgba(251,191,36,.34) 0%, rgba(251,191,36,.13) 42%, rgba(251,191,36,0) 73%);
+            filter: blur(22px);
+        }
+        .hero-home-image {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            border-radius: 46% 54% 35% 65% / 44% 37% 63% 56%;
+            filter: saturate(1.08) contrast(1.04);
+            -webkit-mask-image: radial-gradient(ellipse 74% 76% at 51% 49%, #000 43%, rgba(0,0,0,.96) 58%, rgba(0,0,0,.70) 70%, rgba(0,0,0,.24) 84%, transparent 100%);
+            mask-image: radial-gradient(ellipse 74% 76% at 51% 49%, #000 43%, rgba(0,0,0,.96) 58%, rgba(0,0,0,.70) 70%, rgba(0,0,0,.24) 84%, transparent 100%);
+        }
+        @media (max-width: 767px) {
+            .hero-home-visual { width: min(78vw, 300px); height: min(70vw, 270px); }
+        }
         
         @media print {
             body * { visibility: hidden !important; }
@@ -512,8 +547,8 @@
                             </button>
                         </div>
                     </div>
-                    <div class="w-48 h-48 md:w-64 md:h-64 rounded-full border-4 border-amber-400 overflow-hidden shadow-2xl flex-shrink-0 bg-maroon-900 flex items-center justify-center">
-                        <img id="home-hero-image" src="https://drive.google.com/thumbnail?id=1rVUMf5dnNQDgO1cR6sDdy6lCPBsJ09_4&amp;sz=w1200" alt="Training" class="w-full h-full object-cover">
+                    <div class="hero-home-visual mx-auto md:mr-2 flex-shrink-0" role="img" aria-label="Foto latihan Witan Sulaeman Akademi">
+                        <img id="home-hero-image" src="https://drive.google.com/thumbnail?id=1xgaTM9MA5Ds9pT7Wn5UokyuWj7HJll1a&amp;sz=w1200" alt="Latihan Witan Sulaeman Akademi" class="hero-home-image">
                     </div>
                 </div>
             </div>
@@ -1265,7 +1300,7 @@
                                 <input id="rapor_sign_coach" type="text" maxlength="160" required class="w-full p-2.5 text-xs rounded-lg border border-slate-300" placeholder="Tim Kepelatihan WSA">
                             </div>
                             <div>
-                                <label for="rapor_sign_director" class="block text-xs font-semibold text-slate-700 mb-1">Nama Direktur Teknik Witan Sulaeman Akademi</label>
+                                <label for="rapor_sign_director" class="block text-xs font-semibold text-slate-700 mb-1">Nama Direktur Witan Sulaeman Akademi</label>
                                 <input id="rapor_sign_director" type="text" maxlength="160" required class="w-full p-2.5 text-xs rounded-lg border border-slate-300" placeholder="Witan Sulaeman">
                             </div>
                         </div>
@@ -1432,7 +1467,7 @@
                             <div class="space-y-2">
                                 <p class="text-xs font-semibold text-slate-700">Pratinjau foto</p>
                                 <div class="h-36 w-full overflow-hidden border border-slate-200 bg-slate-50 flex items-center justify-center">
-                                    <img id="set_home_image_preview" src="https://drive.google.com/thumbnail?id=1rVUMf5dnNQDgO1cR6sDdy6lCPBsJ09_4&amp;sz=w800" alt="Pratinjau foto beranda" class="w-full h-full object-cover">
+                                    <img id="set_home_image_preview" src="https://drive.google.com/thumbnail?id=1xgaTM9MA5Ds9pT7Wn5UokyuWj7HJll1a&amp;sz=w800" alt="Pratinjau foto beranda" class="w-full h-full object-cover">
                                 </div>
                                 <p class="text-[10px] text-slate-500">Foto akan tampil di bagian kanan banner Beranda.</p>
                             </div>
@@ -1653,7 +1688,7 @@
         let html5QrCode = null;
         const WSA_LOGO_FILE_ID = '14ZkhPuBhpanMS-PsZU-HODB9FnquZ9vX';
         const WSA_LOGO_URL = 'https://drive.google.com/file/d/' + WSA_LOGO_FILE_ID + '/view?usp=sharing';
-        const DEFAULT_HOME_PAGE_IMAGE = 'https://drive.google.com/thumbnail?id=1rVUMf5dnNQDgO1cR6sDdy6lCPBsJ09_4&sz=w1200';
+        const DEFAULT_HOME_PAGE_IMAGE = 'https://drive.google.com/thumbnail?id=1xgaTM9MA5Ds9pT7Wn5UokyuWj7HJll1a&sz=w1200';
         let homePageImageUrl = DEFAULT_HOME_PAGE_IMAGE;
         const MAX_FILE_BYTES = 5 * 1024 * 1024;
 
@@ -2194,8 +2229,17 @@
             }
         }
 
-        function applyHomePageImage(url) {
+        function resolveHomePageImageUrl(url) {
             const value = String(url || DEFAULT_HOME_PAGE_IMAGE).trim() || DEFAULT_HOME_PAGE_IMAGE;
+            const savedId = getDriveImageId(value);
+            // Migrasi tampilan: jika Pengaturan masih menyimpan foto Beranda lama,
+            // gunakan foto baru sebagai gantinya tanpa menyentuh data lain.
+            if (savedId === '1rVUMf5dnNQDgO1cR6sDdy6lCPBsJ09_4') return DEFAULT_HOME_PAGE_IMAGE;
+            return value;
+        }
+
+        function applyHomePageImage(url) {
+            const value = resolveHomePageImageUrl(url);
             homePageImageUrl = value;
             setImageWithFallback(
                 document.getElementById('home-hero-image'),
@@ -2207,7 +2251,7 @@
 
         async function loadHomePageImage(forSettings) {
             const savedUrl = await apiCall('getHomePageImage');
-            const value = String(savedUrl || DEFAULT_HOME_PAGE_IMAGE).trim() || DEFAULT_HOME_PAGE_IMAGE;
+            const value = resolveHomePageImageUrl(savedUrl);
             applyHomePageImage(value);
             const input = document.getElementById('set_home_image_url');
             if (input && (forSettings || !input.value.trim())) input.value = value;
@@ -3512,9 +3556,9 @@
                         <p class="font-extrabold text-slate-900 border-b border-slate-400 inline-block px-4 pb-1">${escapeHtml(raporSignatures.coach || 'Tim Kepelatihan WSA')}</p>
                     </div>
                     <div class="rapor-signature-block" style="break-inside:avoid;page-break-inside:avoid;">
-                        <p class="text-slate-600 font-bold">Direktur Teknik Witan Sulaeman Akademi</p>
+                        <p class="text-slate-600 font-bold">Direktur Witan Sulaeman Akademi</p>
                         <div style="position:relative;width:190px;height:78px;margin:0 auto 2px;">
-                            <img data-report-director-ttd="1" src="https://drive.google.com/thumbnail?id=1_42awnLzDxb8uVfK2LdwavdrnypPY31o&amp;sz=w400" alt="Tanda tangan Direktur Teknik" style="position:absolute;left:8px;top:3px;width:135px;height:65px;object-fit:contain;">
+                            <img data-report-director-ttd="1" src="https://drive.google.com/thumbnail?id=1_42awnLzDxb8uVfK2LdwavdrnypPY31o&amp;sz=w400" alt="Tanda tangan Direktur" style="position:absolute;left:8px;top:3px;width:135px;height:65px;object-fit:contain;">
                             <img data-report-director-cap="1" src="https://drive.google.com/thumbnail?id=1x9kURfVX5YbFzuoZbH391ZZmHdte9RRX&amp;sz=w400" alt="Cap Witan Sulaeman Akademi" style="position:absolute;right:2px;bottom:0;width:66px;height:66px;object-fit:contain;">
                         </div>
                         <p class="font-extrabold text-slate-900 border-b border-slate-400 inline-block px-4 pb-1">${escapeHtml(raporSignatures.director || 'Witan Sulaeman')}</p>
