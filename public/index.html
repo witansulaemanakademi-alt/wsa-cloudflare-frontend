@@ -548,7 +548,7 @@
                         </div>
                     </div>
                     <div class="hero-home-visual mx-auto md:mr-2 flex-shrink-0" role="img" aria-label="Foto latihan Witan Sulaeman Akademi">
-                        <img id="home-hero-image" src="https://drive.google.com/thumbnail?id=1xgaTM9MA5Ds9pT7Wn5UokyuWj7HJll1a&amp;sz=w1200" alt="Latihan Witan Sulaeman Akademi" class="hero-home-image">
+                        <img id="home-hero-image" src="https://drive.google.com/thumbnail?id=1bU3kV9QUzgZR9Vg_9rrPdjNU_SwqTa7m&amp;sz=w1200" alt="Latihan Witan Sulaeman Akademi" class="hero-home-image">
                     </div>
                 </div>
             </div>
@@ -1467,7 +1467,7 @@
                             <div class="space-y-2">
                                 <p class="text-xs font-semibold text-slate-700">Pratinjau foto</p>
                                 <div class="h-36 w-full overflow-hidden border border-slate-200 bg-slate-50 flex items-center justify-center">
-                                    <img id="set_home_image_preview" src="https://drive.google.com/thumbnail?id=1xgaTM9MA5Ds9pT7Wn5UokyuWj7HJll1a&amp;sz=w800" alt="Pratinjau foto beranda" class="w-full h-full object-cover">
+                                    <img id="set_home_image_preview" src="https://drive.google.com/thumbnail?id=1bU3kV9QUzgZR9Vg_9rrPdjNU_SwqTa7m&amp;sz=w800" alt="Pratinjau foto beranda" class="w-full h-full object-cover">
                                 </div>
                                 <p class="text-[10px] text-slate-500">Foto akan tampil di bagian kanan banner Beranda.</p>
                             </div>
@@ -1688,7 +1688,7 @@
         let html5QrCode = null;
         const WSA_LOGO_FILE_ID = '14ZkhPuBhpanMS-PsZU-HODB9FnquZ9vX';
         const WSA_LOGO_URL = 'https://drive.google.com/file/d/' + WSA_LOGO_FILE_ID + '/view?usp=sharing';
-        const DEFAULT_HOME_PAGE_IMAGE = 'https://drive.google.com/thumbnail?id=1xgaTM9MA5Ds9pT7Wn5UokyuWj7HJll1a&sz=w1200';
+        const DEFAULT_HOME_PAGE_IMAGE = 'https://drive.google.com/thumbnail?id=1bU3kV9QUzgZR9Vg_9rrPdjNU_SwqTa7m&sz=w1200';
         let homePageImageUrl = DEFAULT_HOME_PAGE_IMAGE;
         const MAX_FILE_BYTES = 5 * 1024 * 1024;
 
@@ -2234,7 +2234,7 @@
             const savedId = getDriveImageId(value);
             // Migrasi tampilan: jika Pengaturan masih menyimpan foto Beranda lama,
             // gunakan foto baru sebagai gantinya tanpa menyentuh data lain.
-            if (savedId === '1rVUMf5dnNQDgO1cR6sDdy6lCPBsJ09_4') return DEFAULT_HOME_PAGE_IMAGE;
+            if (savedId === '1rVUMf5dnNQDgO1cR6sDdy6lCPBsJ09_4' || savedId === '1xgaTM9MA5Ds9pT7Wn5UokyuWj7HJll1a') return DEFAULT_HOME_PAGE_IMAGE;
             return value;
         }
 
