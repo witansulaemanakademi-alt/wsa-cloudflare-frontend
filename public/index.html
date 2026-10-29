@@ -750,6 +750,11 @@
                                 <label class="block text-xs font-bold text-slate-700 mb-1">17. Rapor / NISN (PDF/Gambar) <span class="text-red-500">*</span></label>
                                 <input type="file" id="file_rapor" accept="application/pdf,image/jpeg,image/png,image/webp,image/gif,image/heic,image/heif" required class="text-xs w-full text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-maroon-700 file:text-white hover:file:bg-maroon-800">
                             </div>
+                            <div class="p-3 bg-slate-50 rounded-lg border border-slate-200">
+                                <label class="block text-xs font-bold text-slate-700 mb-1">18. Kartu Keluarga (KK) (PDF/Gambar/Foto) <span class="text-red-500">*</span></label>
+                                <input type="file" id="file_kk" accept="application/pdf,image/jpeg,image/png,image/webp,image/gif,image/heic,image/heif" required class="text-xs w-full text-slate-500 file:mr-2 file:py-1.5 file:px-3 file:rounded-md file:border-0 file:text-xs file:font-semibold file:bg-maroon-700 file:text-white hover:file:bg-maroon-800">
+                                <p class="text-[10px] text-slate-500 mt-1">Unggah Kartu Keluarga dalam format PDF atau foto/gambar yang jelas. Maksimal 5 MB.</p>
+                            </div>
                         </div>
                     </div>
 
@@ -2510,7 +2515,8 @@
                     posisi: document.getElementById('reg_posisi').value,
                     kaki: document.getElementById('reg_kaki').value,
                     orang_tua: document.getElementById('reg_orang_tua').value,
-                    hp_ortu: document.getElementById('reg_hp_ortu').value
+                    hp_ortu: document.getElementById('reg_hp_ortu').value,
+                    require_kk: true
                 };
                 const start = await apiCall('beginRegistration', data);
                 registrationToken = start.token;
@@ -2518,10 +2524,11 @@
                     ['file_foto', document.getElementById('file_foto').files[0]],
                     ['file_akte', document.getElementById('file_akte').files[0]],
                     ['file_ijazah', document.getElementById('file_ijazah').files[0]],
-                    ['file_rapor', document.getElementById('file_rapor').files[0]]
+                    ['file_rapor', document.getElementById('file_rapor').files[0]],
+                    ['file_kk', document.getElementById('file_kk').files[0]]
                 ];
                 for (let i = 0; i < uploads.length; i++) {
-                    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Mengunggah berkas ' + (i + 1) + '/4...';
+                    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Mengunggah berkas ' + (i + 1) + '/5...';
                     const payload = await fileToPayload(uploads[i][0], uploads[i][1]);
                     await apiCall('uploadRegistrationFile', registrationToken, payload);
                 }
@@ -2769,6 +2776,7 @@
                             <span class="inline-flex items-center text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-semibold"><i class="fa-solid fa-file-lines mr-1 text-rose-600"></i> ${escapeHtml(p.file_akte || 'Akte.pdf')}</span><br>
                             <span class="inline-flex items-center text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-semibold"><i class="fa-solid fa-file-lines mr-1 text-rose-600"></i> ${escapeHtml(p.file_ijazah || 'Ijazah.pdf')}</span><br>
                             <span class="inline-flex items-center text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-semibold"><i class="fa-solid fa-file-lines mr-1 text-rose-600"></i> ${escapeHtml(p.file_rapor || 'Rapor.pdf')}</span>
+                            ${p.file_kk ? '<br><span class="inline-flex items-center text-emerald-700 bg-emerald-50 px-1.5 py-0.5 rounded font-semibold"><i class="fa-solid fa-file-lines mr-1 text-rose-600"></i> ' + escapeHtml(p.file_kk) + '</span>' : ''}
                         </div>
                     </td>
                     <td class="p-3">
@@ -3738,9 +3746,9 @@
 
         function exportPlayersCSV() {
             if (players.length === 0) return notifyUser('Tidak ada data pemain untuk di-export.', 'warning');
-            let csv = 'ID,Nama,NISN,Nama Tim,Sekolah Saat Ini,NPSN,Posisi,Tempat Lahir,Tanggal Lahir,HP Pemain,Orang Tua (Ibu),HP Ortu,Akte,Ijazah,Rapor,Status\n';
+            let csv = 'ID,Nama,NISN,Nama Tim,Sekolah Saat Ini,NPSN,Posisi,Tempat Lahir,Tanggal Lahir,HP Pemain,Orang Tua (Ibu),HP Ortu,Akte,Ijazah,Rapor,Kartu Keluarga (KK),Status\n';
             players.forEach(p => {
-                csv += `"${p.id}","${p.nama}","${p.nisn}","${getPlayerTeamName(p)}","${p.asal_sekolah || ''}","${p.npsn || ''}","${p.posisi}","${p.tempat_lahir}","${p.tanggal_lahir}","${p.hp_pemain}","${p.orang_tua}","${p.hp_ortu}","${p.file_akte || ''}","${p.file_ijazah || ''}","${p.file_rapor || ''}","${p.status}"\n`;
+                csv += `"${p.id}","${p.nama}","${p.nisn}","${getPlayerTeamName(p)}","${p.asal_sekolah || ''}","${p.npsn || ''}","${p.posisi}","${p.tempat_lahir}","${p.tanggal_lahir}","${p.hp_pemain}","${p.orang_tua}","${p.hp_ortu}","${p.file_akte || ''}","${p.file_ijazah || ''}","${p.file_rapor || ''}","${p.file_kk || ''}","${p.status}"\n`;
             });
             downloadCSV(csv, 'Data_Pemain_Witan_Sulaeman_Akademi.csv');
         }
